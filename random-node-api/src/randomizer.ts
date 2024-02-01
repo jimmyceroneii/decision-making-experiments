@@ -1,6 +1,4 @@
-const list = [1, 2, 3, 4];
-
-const shuffleList = <T>(list: T[]): T[] => {
+export const shuffleList = <T>(list: T[]): T[] => {
     const listToShuffle = [...list];
 
     for (let i = listToShuffle.length - 1; i > 0; i--) {
@@ -9,9 +7,4 @@ const shuffleList = <T>(list: T[]): T[] => {
     }
 
     return listToShuffle;
-}
-
-const shuffledList = shuffleList<number>(list);
-
-console.log('before: ', list);
-console.log('after: ', shuffledList);
+};
