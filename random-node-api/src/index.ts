@@ -1,15 +1,28 @@
 import express, { Request, Response } from 'express';
-import { shuffleList } from "./randomizer";
+import * as fs from 'fs';
+import { shuffleList } from './randomizer';
 
 const app = express();
 const PORT = 3000;
 
 const list = [1, 2, 3, 4];
 
-app.get('/randomList', (req: Request, res: Response) => {
-    const shuffledList = shuffleList<number>(list);
+app.get('/product/random', (req: Request, res: Response) => {
+    
 
-    res.send(JSON.stringify(shuffledList));
+const filePath: string = __dirname + '/products.txt';
+
+try {
+    const fileContent: string = fs.readFileSync(filePath, 'utf-8');
+    const lines: string[] = fileContent.split('\n');
+
+    const randomLine = shuffleList(lines)[0];
+    console.log(randomLine);
+    // TODO: fix this
+    return `<h1>${randomLine}<h1>`;
+} catch (error) {
+    console.error(`Error reading the file: ${error}`);
+}
 });
 
 app.listen(PORT, () => {
