@@ -5,8 +5,6 @@ import { shuffleList } from './randomizer';
 const app = express();
 const PORT = 3000;
 
-const list = [1, 2, 3, 4];
-
 app.get('/product/random', (req: Request, res: Response) => {
     
 
@@ -17,9 +15,8 @@ try {
     const lines: string[] = fileContent.split('\n');
 
     const randomLine = shuffleList(lines)[0];
-    console.log(randomLine);
-    // TODO: fix this
-    return `<h1>${randomLine}<h1>`;
+
+    res.send(`<p>${randomLine}</p>`);
 } catch (error) {
     console.error(`Error reading the file: ${error}`);
 }
