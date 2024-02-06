@@ -1,1 +1,0 @@
-I'm writing this backend in Java with Spring Boot to learn about the setup. I'm uncertain if this will be overkill, but we will see. 
