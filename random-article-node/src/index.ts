@@ -1,6 +1,10 @@
 import * as fs from 'fs';
 import * as path from 'path';
+
 import { shuffleList } from './randomizer';
+
+import { getSimilar } from './search';
+import { sendEmail } from './send';
 
 const main = async () => {
   const absolutePath = path.resolve(__dirname, '../..');
@@ -18,7 +22,17 @@ const main = async () => {
 
     const shuffledArticles = shuffleList(articles);
 
-    console.log(shuffledArticles[0][0] + ": " + shuffledArticles[0][3]);
+    const randomArticle = shuffledArticles[0];
+
+    const randomArticleString = randomArticle[0] + ": " + randomArticle[3];
+
+    const similarArticles = await getSimilar(randomArticle[3]);
+
+    const similarArticlesString = '\n\nSimilar: ' + similarArticles;
+
+    const emailBody = randomArticleString + similarArticlesString;
+
+    await sendEmail(emailBody);
   } catch (error) {
     console.error(`Error reading the file: ${error}`)
   }

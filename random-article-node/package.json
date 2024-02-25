@@ -19,6 +19,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "metaphor-node": "^1.0.30"
+    "metaphor-node": "^1.0.30",
+    "resend": "^3.2.0"
   }
 }

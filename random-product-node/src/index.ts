@@ -7,14 +7,14 @@ const main = async () => {
 
   try {
     const fileContent: string = fs.readFileSync(filePath, 'utf-8')
-    const lines: string[] = fileContent.split('\n')
+    const products: string[] = fileContent.split('\n')
 
-    const randomLine = shuffleList(lines)[0]
+    const randomProduct = shuffleList(products)[0]
 
-    const sources = await searchForContent(`Here is some information about the following product: ${randomLine}`);
-    const similar = await getSimilar(randomLine);
+    const sources = await searchForContent(`Here is some information about the following product: ${randomProduct}`);
+    const similar = await getSimilar(randomProduct);
 
-    console.log(randomLine);
+    console.log(randomProduct);
     console.log(sources);
     console.log(similar);
   } catch (error) {
