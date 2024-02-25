@@ -3,6 +3,7 @@ name: Daily Random Matter Article
 on:
   schedule:
     - cron: '0 0 * * *' # Runs the job every day at midnight UTC
+  workflow_dispatch: # allow for manual trigger
 
 jobs:
   run-script:
