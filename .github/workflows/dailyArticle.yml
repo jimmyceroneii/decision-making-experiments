@@ -25,7 +25,7 @@ jobs:
         run: pwd
 
       - name: Install dependencies
-        run: cd decision-making-experiments/random-article-node && yarn
+        run: cd ./random-article-node && yarn
   
       - name: Run script
-        run: cd decision-making-experiments/random-article-node && yarn start
+        run: cd ./random-article-node && yarn start
