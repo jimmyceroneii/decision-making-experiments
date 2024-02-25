@@ -18,14 +18,8 @@ jobs:
         with:
           node-version: '14'
 
-      - name: Print working directory
-        run: pwd
-
-      - name: Change working directory
-        run: cd /decision-making-experiments/random-article-node
-  
       - name: Install dependencies
-        run: yarn install
+        run: cd decision-making-experiments/random-article-node && yarn
   
       - name: Run script
-        run: yarn start
+        run: cd decision-making-experiments/random-article-node && yarn start
