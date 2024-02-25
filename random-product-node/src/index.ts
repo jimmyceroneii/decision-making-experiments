@@ -1,5 +1,5 @@
-import * as fs from 'fs'
-import { shuffleList } from './randomizer'
+import * as fs from 'fs';
+import { shuffleList } from './randomizer';
 import { getSimilar, searchForContent } from './search';
 
 const main = async () => {
