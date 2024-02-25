@@ -16,13 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '14'
-
-      - name: check files
-        run: ls
-
-      - name: pwd
-        run: pwd
+          node-version: '18'
 
       - name: Install dependencies
         run: cd ./random-article-node && yarn
