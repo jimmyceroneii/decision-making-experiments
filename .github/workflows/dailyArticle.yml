@@ -6,7 +6,7 @@ on:
   workflow_dispatch: # allow for manual trigger
 
 jobs:
-  run-script:
+  send-email:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,6 +17,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '14'
+
+      - name: check files
+        run: ls
+
+      - name: pwd
+        run: pwd
 
       - name: Install dependencies
         run: cd decision-making-experiments/random-article-node && yarn
