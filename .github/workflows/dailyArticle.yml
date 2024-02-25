@@ -22,7 +22,7 @@ jobs:
         run: pwd
 
       - name: Change working directory
-        run: cd /workspaces/decision-making-experiments/random-article-node
+        run: cd /decision-making-experiments/random-article-node
   
       - name: Install dependencies
         run: yarn install
