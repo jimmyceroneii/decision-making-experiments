@@ -18,6 +18,9 @@ jobs:
         with:
           node-version: '14'
 
+      - name: Print working directory
+        run: pwd
+
       - name: Change working directory
         run: cd /workspaces/decision-making-experiments/random-article-node
   
