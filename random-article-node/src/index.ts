@@ -24,17 +24,29 @@ const main = async () => {
 
     const randomArticle = shuffledArticles[0];
 
-    const randomArticleString = randomArticle[0] + ": " + randomArticle[3];
+    console.log('Found random article: ', randomArticle[0]);
+
+    const randomArticleId = randomArticle[randomArticle.length - 1].split('.')[0].split('_')[1];
+
+    const matterUrl = 'https://web.getmatter.com/entry/' + randomArticleId;
+
+    const randomArticleString = randomArticle[0] + ": " + matterUrl;
+
+    console.log('Finding similar articles...')
 
     const similarArticles = await getSimilar(randomArticle[3]);
 
-    const similarArticlesString = '\n\nSimilar: ' + similarArticles;
+    const similarArticlesString = '\n\nSimilar:\n\n ' + similarArticles.join('\n');
 
     const emailBody = randomArticleString + similarArticlesString;
 
+    console.log('sending email with daily article...')
+
     await sendEmail(emailBody);
+
+    console.log('sent article of the day')
   } catch (error) {
-    console.error(`Error reading the file: ${error}`)
+    console.error(`Error while sending article of the day: ${error}`)
   }
 }
 
