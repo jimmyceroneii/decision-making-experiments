@@ -9,6 +9,10 @@ jobs:
   send-email:
     runs-on: ubuntu-latest
 
+    env:
+      EXA_API_KEY: ${{ secrets.EXA_API_KEY }}
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
