@@ -1,0 +1,7 @@
+{
+  "name": "random-book-node",
+  "version": "1.0.0",
+  "description": "Selects random books from a list",
+  "main": "index.js",
+  "license": "MIT"
+}
