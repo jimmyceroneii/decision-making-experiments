@@ -22,6 +22,11 @@ jobs:
         with:
           node-version: '18'
 
+      - name: troubleshooting
+        run: |
+          length=$(echo -n "$RESEND_API_KEY" | wc -c)
+          echo "Length of RESEND_API_KEY: $length"
+
       - name: Install dependencies
         run: cd ./random-article-node && yarn
   
