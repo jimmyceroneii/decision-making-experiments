@@ -7,3 +7,9 @@ npx tsc -init
 cp ../random-product-node/.prettierrc .
 
 cp ../random-product-node/.eslintrc.js .
+
+mkdir src
+
+cd src
+
+touch index.ts
