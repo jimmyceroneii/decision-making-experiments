@@ -1,0 +1,19 @@
+{
+  "name": "local-llm",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.24",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "eslint-plugin-prettier": "^5.1.3",
+    "replicate": "^0.27.1"
+  }
+}
