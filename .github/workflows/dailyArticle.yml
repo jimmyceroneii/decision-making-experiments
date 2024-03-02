@@ -8,6 +8,8 @@ on:
 jobs:
   send-email:
     runs-on: ubuntu-latest
+    environment:
+      name: Production
 
     env:
       EXA_API_KEY: ${{ secrets.EXA_API_KEY }}
