@@ -6,7 +6,7 @@ export const sendEmail = async (emailBody: string) => {
     await resend.emails.send({
         from: 'onboarding@resend.dev',
         to: 'jimmy.cerone@gmail.com',
-        subject: 'Article of the Day',
-        html: `<p>The article of the day is: \n\n${emailBody}</p>`
+        subject: 'Product of the Week',
+        html: `<p>The product of the week is: \n\n${emailBody}</p>`
       });
 }
