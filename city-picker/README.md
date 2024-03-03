@@ -15,3 +15,19 @@ I've identified a couple of potential starting data sources for this work, but i
 - [US Census](https://data.census.gov/)
 
 An existing product I find inspiring is: [Nomad List](https://nomadlist.com/). My goal is to create a more filter oriented qualitative version of Nomad List that is more flexible for folks beyond just digital nomads. 
+
+## Selection Criteria
+
+Right now I'm debating using the following selection criteria: 
+
+- Income Tax
+- Property Tax
+- Cost of Living (How to define?)
+- Average Rent
+- Density of Restaurants
+- Population
+- Change in Population
+- Age Diversity
+- Demographic Diversity
+- Seasonality / Climate
+- Outdoor Attractions (mountains, ocean, lakes)
