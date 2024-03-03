@@ -10,6 +10,7 @@
   "dependencies": {
     "@types/node": "^20.11.14",
     "metaphor-node": "^1.0.30",
+    "resend": "^3.2.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   },

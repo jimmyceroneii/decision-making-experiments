@@ -32,11 +32,15 @@ const main = async () => {
 
     const randomArticleString = randomArticle[0] + ": " + matterUrl;
 
+    console.log('Matter URL: ', randomArticleString);
+
     console.log('Finding similar articles...')
 
     const similarArticles = await getSimilar(randomArticle[3]);
 
     const similarArticlesString = '\n\nSimilar:\n\n ' + similarArticles.join('\n');
+
+    console.log('Similar Articles: ', similarArticlesString);
 
     const emailBody = randomArticleString + similarArticlesString;
 
