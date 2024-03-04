@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import { shuffleList } from './randomizer';
 import { getSimilar, searchForContent } from './search';
-import { sendEmail } from './send';
+import { generateEmail, sendEmail } from './send';
 
 const main = async () => {
   const filePath: string = 'src/products.txt'
@@ -21,10 +21,10 @@ const main = async () => {
     const similar = await getSimilar(randomProduct);
     
     console.log('Similar: ', similar);
+    
+    const emailHtml = generateEmail(randomProduct, sources, similar);
 
-    const emailBody = `Product: ${randomProduct}\n\nSources: \n${sources}\n\nSimilar: \n${similar}`;
-
-    await sendEmail(emailBody);
+    await sendEmail(emailHtml);
 
     console.log('sent product of the week')
   } catch (error) {

@@ -1,0 +1,17 @@
+<html>
+   <body>
+      <h1>Product of the Week: <%= product %></h1>
+      <p>Sources</p>
+      <ul>
+        <% sources.forEach(function(source) { %>
+            <li><%= source %></li>
+        <% }); %>
+      </ul>
+      <p>Similar Products</p>
+      <ul>
+        <% similarProducts.forEach(function(similarProduct) { %>
+            <li><%= similarProduct %></li>
+        <% }); %>
+      </ul>
+   </body>
+</html>
