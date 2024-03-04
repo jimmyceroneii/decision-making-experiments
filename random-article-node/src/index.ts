@@ -4,7 +4,7 @@ import * as path from 'path';
 import { shuffleList } from './randomizer';
 
 import { getSimilar } from './search';
-import { sendEmail } from './send';
+import { generateEmail, sendEmail } from './send';
 
 const main = async () => {
   const absolutePath = path.resolve(__dirname, '../..');
@@ -42,11 +42,11 @@ const main = async () => {
 
     console.log('Similar Articles: ', similarArticlesString);
 
-    const emailBody = randomArticleString + similarArticlesString;
+    const emailHtml = generateEmail(randomArticleString, similarArticles);
 
     console.log('sending email with daily article...')
 
-    await sendEmail(emailBody);
+    await sendEmail(emailHtml);
 
     console.log('sent article of the day')
   } catch (error) {

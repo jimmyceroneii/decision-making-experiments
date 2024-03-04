@@ -1,0 +1,11 @@
+<html>
+   <body>
+      <h1>Article of the Day: <%= article %></h1>
+      <p>Similar Articles</p>
+      <ul>
+        <% similarArticles.forEach(function(similarArticle) { %>
+            <li><%= similarArticle %></li>
+        <% }); %>
+      </ul>
+   </body>
+</html>
