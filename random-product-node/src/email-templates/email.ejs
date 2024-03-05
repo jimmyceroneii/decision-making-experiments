@@ -4,13 +4,13 @@
       <p>Sources</p>
       <ul>
         <% sources.forEach(function(source) { %>
-            <li><%= source %></li>
+            <li><a href="<%= source %>"><%= source %></a></li>
         <% }); %>
       </ul>
       <p>Similar Products</p>
-      <ul>
+      <ul> 
         <% similarProducts.forEach(function(similarProduct) { %>
-            <li><%= similarProduct %></li>
+            <li><a href="<%= similarProduct %>"><%= similarProduct %></a></li>
         <% }); %>
       </ul>
    </body>

@@ -14,9 +14,13 @@ const main = async () => {
 
     console.log('Product: ', randomProduct);
 
+    console.log('Finding news stories...')
+
     const sources = await searchForContent(`Here is some information about the following product: ${randomProduct}`);
 
     console.log('Sources: ', sources);
+
+    console.log('Finding similar products...')
 
     const similar = await getSimilar(randomProduct);
     
