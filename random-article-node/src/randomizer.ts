@@ -8,7 +8,3 @@ export const shuffleList = <T>(list: T[]): T[] => {
 
     return listToShuffle;
 };
-
-export const isRead = (article: any) => {
-    return article[0] === 'True';
-}
