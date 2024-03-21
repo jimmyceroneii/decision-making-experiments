@@ -23,7 +23,7 @@ const convertCsvToTypedArray = async (filename: string): Promise<Article[]> => {
                 read,
                 highlightCount,
                 lastInteractionDate
-            }
+            };
 
             const validationResult = articleSchema.validate(rowObject);
 

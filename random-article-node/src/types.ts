@@ -3,8 +3,8 @@ import * as Joi from "joi";
 export const articleSchema = Joi.object({
     id: Joi.string().required(),
     title: Joi.string().required(),
-    author: Joi.string().allow(undefined),
-    publisher: Joi.string().allow(undefined),
+    author: Joi.string().allow(null),
+    publisher: Joi.string().allow(null),
     url: Joi.string().required(),
     tags: Joi.any(),
     wordCount: Joi.number().required(),
