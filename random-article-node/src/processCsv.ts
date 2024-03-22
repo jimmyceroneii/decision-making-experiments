@@ -10,7 +10,16 @@ const convertCsvToTypedArray = async (filename: string): Promise<{ articles: Art
 
         const errorsArray: ValidationError[] = [];
 
+        let isFirstRow = true;
+
+        let i = 0;
+
         fs.createReadStream(filename).pipe(parse({ delimiter: ',' })).on('data', (row: any) => {
+            if (isFirstRow) {
+                isFirstRow = false;
+                return;
+            }
+
             const [title, author, publisher, url, tags, wordCount, inQueue, favorited, read, highlightCount, lastInteractionDate, id] = row;
 
             const rowObject = {
@@ -20,7 +29,7 @@ const convertCsvToTypedArray = async (filename: string): Promise<{ articles: Art
                 publisher,
                 url,
                 tags,
-                wordCount,
+                wordCount: wordCount === '' ? 0 : parseInt(wordCount),
                 inQueue,
                 favorited,
                 read,
@@ -31,7 +40,14 @@ const convertCsvToTypedArray = async (filename: string): Promise<{ articles: Art
             const validationResult = articleSchema.validate(rowObject);
 
             if (validationResult.error) {
+                if (i < 10) {
+                    console.log(validationResult.error.details);
+                    console.log(row);
+                }
+
                 errorsArray.push(validationResult.error);
+
+                i++;
             } else {
                 articles.push(rowObject);
             }
@@ -43,15 +59,10 @@ const convertCsvToTypedArray = async (filename: string): Promise<{ articles: Art
     });
 }
 
-const main = async () => {
+export const retrieveArticlesAndFomat = async () => {
     const absolutePath = path.resolve(__dirname, '../..');
 
     const filePath = path.join(absolutePath, '_matter_history.csv');
 
-    const results = await convertCsvToTypedArray(filePath);
-
-    console.log('articles: ', results.articles.length);
-    console.log('errors: ', results.errors.length)
+    return await convertCsvToTypedArray(filePath);
 }
-
-main();

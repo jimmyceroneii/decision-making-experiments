@@ -1,12 +1,12 @@
 import * as Joi from "joi";
 
 export const articleSchema = Joi.object({
-    id: Joi.string().required(),
+    id: Joi.string().required().allow(''),
     title: Joi.string().required(),
-    author: Joi.string().allow(null),
-    publisher: Joi.string().allow(null),
-    url: Joi.string().required(),
-    tags: Joi.any(),
+    author: Joi.string().allow('', null).required(),
+    publisher: Joi.string().allow('', null).required(),
+    url: Joi.string().required().allow(''),
+    tags: Joi.any().required(),
     wordCount: Joi.number().required(),
     inQueue: Joi.boolean().required(),
     favorited: Joi.boolean().required(),
@@ -18,8 +18,8 @@ export const articleSchema = Joi.object({
 export type Article = {
     id: string;
     title: string;
-    author: string;
-    publisher: string;
+    author: string | null;
+    publisher: string | null;
     url: string;
     tags: any;
     wordCount: number;
@@ -27,5 +27,5 @@ export type Article = {
     favorited: boolean;
     read: boolean;
     highlightCount: number;
-    lastInteractionDate: any;
+    lastInteractionDate: string;
 }   
