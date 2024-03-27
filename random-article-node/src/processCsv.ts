@@ -3,6 +3,19 @@ import { ValidationError } from 'joi';
 import * as fs from "fs";
 import * as path from 'path';
 import { parse } from 'csv-parse';
+import { isValidArticle } from './filter';
+
+export const convertToBoolean = (field: string): boolean => {
+    return field.toLowerCase() === 'true' ? true : false;
+}
+
+export const convertToId = (id: string | undefined): string => {
+    if (!id) {
+        return '';
+    }
+
+    return id.split('_')[1].split('.')[0];
+}
 
 const convertCsvToTypedArray = async (filename: string): Promise<{ articles: Article[], errors: ValidationError[] }> => {
     return new Promise((resolve, reject) => {
@@ -23,16 +36,16 @@ const convertCsvToTypedArray = async (filename: string): Promise<{ articles: Art
             const [title, author, publisher, url, tags, wordCount, inQueue, favorited, read, highlightCount, lastInteractionDate, id] = row;
 
             const rowObject = {
-                id,
+                id: convertToId(id),
                 title,
                 author,
                 publisher,
                 url,
                 tags,
                 wordCount: wordCount === '' ? 0 : parseInt(wordCount),
-                inQueue,
-                favorited,
-                read,
+                inQueue: convertToBoolean(inQueue),
+                favorited: convertToBoolean(favorited),
+                read: convertToBoolean(read),
                 highlightCount,
                 lastInteractionDate
             };

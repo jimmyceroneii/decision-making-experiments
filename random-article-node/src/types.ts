@@ -1,7 +1,7 @@
 import * as Joi from "joi";
 
 export const articleSchema = Joi.object({
-    id: Joi.string().required().allow(''),
+    id: Joi.string().required(),
     title: Joi.string().required(),
     author: Joi.string().allow('', null).required(),
     publisher: Joi.string().allow('', null).required(),

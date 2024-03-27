@@ -3,6 +3,7 @@ import { shuffleList } from './randomizer';
 import { getSimilar } from './search';
 import { generateEmail, sendEmail } from './send';
 import { retrieveArticlesAndFomat } from './processCsv';
+import { isValidArticle } from './filter';
 
 const main = async () => {
   try {
@@ -13,7 +14,15 @@ const main = async () => {
 
     const shuffledArticles = shuffleList(articles);
 
-    const randomArticle = shuffledArticles[0];
+    console.log('filtering articles');
+
+    const filteredArticles = shuffledArticles.filter((article) => isValidArticle(article));
+
+    console.log('articles left after filter: ', filteredArticles.length);
+
+    const randomArticle = filteredArticles[0];
+
+    console.log(randomArticle)
 
     console.log('Found random article: ', randomArticle.title);
 

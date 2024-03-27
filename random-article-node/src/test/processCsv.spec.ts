@@ -1,3 +1,4 @@
+import { convertToBoolean, convertToId } from "../processCsv"
 import { Article, articleSchema } from "../types"
 
 describe("Article Schema", () => {
@@ -86,5 +87,25 @@ describe("Article Schema", () => {
         const validationResponse = articleSchema.validate(articleWithEmptyString);
 
         expect(validationResponse.error).toBeUndefined();
+    })
+
+    test('converts string to boolean', () => {
+        const test1 = 'True';
+        const test2 = 'False';
+        const test3 = 'true';
+        const test4 = 'false';
+        const test5 = 'random';
+
+        expect(convertToBoolean(test1)).toEqual(true)
+        expect(convertToBoolean(test2)).toEqual(false)
+        expect(convertToBoolean(test3)).toEqual(true)
+        expect(convertToBoolean(test4)).toEqual(false)
+        expect(convertToBoolean(test5)).toEqual(false)
+    })
+
+    test('converts string to id', () => {
+        const test1 = 'content_102345.html';
+
+        expect(convertToId(test1)).toEqual('102345');
     })
 })
