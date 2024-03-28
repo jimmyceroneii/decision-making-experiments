@@ -2,7 +2,7 @@ name: Daily Random Matter Article
 
 on:
   schedule:
-    - cron: '0 20 * * *' # Runs the job every day at midnight UTC
+    - cron: '0 11 * * *' # Runs the job every day at 6 am EST
   workflow_dispatch: # allow for manual trigger
 
 jobs:
