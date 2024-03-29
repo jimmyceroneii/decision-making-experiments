@@ -1,0 +1,33 @@
+const token = process.env.READWISE_API_TOKEN || ''
+
+const fetchDocumentListApi = async (updatedAfter=null, location=null) => {
+    let fullData = [];
+    let nextPageCursor = null;
+
+    while (true) {
+      const queryParams = new URLSearchParams();
+      if (nextPageCursor) {
+        queryParams.append('pageCursor', nextPageCursor);
+      }
+      if (updatedAfter) {
+        queryParams.append('updatedAfter', updatedAfter);
+      }
+      if (location) {
+        queryParams.append('location', location);
+      }
+      console.log('Making export api request with params ' + queryParams.toString());
+      const response = await fetch('https://readwise.io/api/v3/list/?' + queryParams.toString(), {
+        method: 'GET',
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      });
+      const responseJson = await response.json();
+      fullData.push(...responseJson['results']);
+      nextPageCursor = responseJson['nextPageCursor'];
+      if (!nextPageCursor) {
+        break;
+      }
+    }
+    return fullData;
+};

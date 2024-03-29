@@ -71,7 +71,7 @@ const convertCsvToTypedArray = async (filename: string): Promise<{ articles: Art
     });
 }
 
-export const retrieveArticlesAndFomat = async () => {
+export const retrieveArticlesAndFormat = async () => {
     const absolutePath = path.resolve(__dirname, '.');
 
     const filePath = path.join(absolutePath, '_matter_history.csv');

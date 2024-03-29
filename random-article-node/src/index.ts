@@ -2,12 +2,12 @@ import { shuffleList } from './randomizer';
 
 import { getSimilar } from './search';
 import { generateEmail, sendEmail } from './send';
-import { retrieveArticlesAndFomat } from './sources/matter/processMatterCsv';
+import { retrieveArticlesAndFormat } from './sources/matter/processMatterCsv';
 import { isValidArticle } from './sources/matter/filter';
 
 const main = async () => {
   try {
-    const { articles, errors } = await retrieveArticlesAndFomat();
+    const { articles, errors } = await retrieveArticlesAndFormat();
 
     console.log('articles: ', articles.length);
     console.log('errors: ', errors.length);
