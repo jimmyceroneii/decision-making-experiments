@@ -2,8 +2,8 @@ import { shuffleList } from './randomizer';
 
 import { getSimilar } from './search';
 import { generateEmail, sendEmail } from './send';
-import { retrieveArticlesAndFomat } from './processCsv';
-import { isValidArticle } from './filter';
+import { retrieveArticlesAndFomat } from './sources/matter/processMatterCsv';
+import { isValidArticle } from './sources/matter/filter';
 
 const main = async () => {
   try {

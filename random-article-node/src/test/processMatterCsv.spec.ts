@@ -1,5 +1,5 @@
-import { convertToBoolean, convertToId } from "../processCsv"
-import { Article, articleSchema } from "../types"
+import { convertToBoolean, convertToId } from '../sources/matter/processMatterCsv';
+import { Article, articleSchema } from '../sources/matter/types';
 
 describe("Article Schema", () => {
     const validArticle: Article = {

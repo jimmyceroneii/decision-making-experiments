@@ -3,7 +3,6 @@ import { ValidationError } from 'joi';
 import * as fs from "fs";
 import * as path from 'path';
 import { parse } from 'csv-parse';
-import { isValidArticle } from './filter';
 
 export const convertToBoolean = (field: string): boolean => {
     return field.toLowerCase() === 'true' ? true : false;
@@ -73,7 +72,7 @@ const convertCsvToTypedArray = async (filename: string): Promise<{ articles: Art
 }
 
 export const retrieveArticlesAndFomat = async () => {
-    const absolutePath = path.resolve(__dirname, '../..');
+    const absolutePath = path.resolve(__dirname, '.');
 
     const filePath = path.join(absolutePath, '_matter_history.csv');
 

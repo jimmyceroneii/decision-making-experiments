@@ -1,5 +1,5 @@
-import { Article } from "../types";
 import Chance from 'chance';
+import { Article } from '../sources/matter/types';
 
 const chance = new Chance();
 

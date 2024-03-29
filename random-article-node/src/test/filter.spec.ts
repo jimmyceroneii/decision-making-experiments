@@ -1,5 +1,5 @@
-import { isValidArticle } from "../filter";
-import { Article } from "../types";
+import { isValidArticle } from "../sources/matter/filter";
+import { Article } from "../sources/matter/types";
 import { generateTestArticle } from "./helper";
 
 describe('filter', () => {
