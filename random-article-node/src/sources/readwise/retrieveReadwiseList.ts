@@ -1,7 +1,9 @@
-const token = process.env.READWISE_API_TOKEN || ''
+import { ReadwiseArticle } from './types';
 
-const fetchDocumentListApi = async (updatedAfter=null, location=null) => {
-    let fullData = [];
+const token = process.env.READWISE_API_TOKEN || '';
+
+export const fetchDocumentListApi = async (updatedAfter=null, location=null) => {
+    let fullData: ReadwiseArticle[] = [];
     let nextPageCursor = null;
 
     while (true) {

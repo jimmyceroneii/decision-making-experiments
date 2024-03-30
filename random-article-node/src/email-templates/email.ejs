@@ -1,11 +1,18 @@
 <html>
    <body>
-      <h1>Article of the Day: <a href="<%= article %>"><%= article %></a></h1>
-      <p>Similar Articles</p>
+      <h1>Matter Article of the Day: <a href="<%= matterArticleUrl %>"><%= matterArticleTitle %></a></h1>
+      <p>Similar Matter Articles</p>
       <ul>
-        <% similarArticles.forEach(function(similarArticle) { %>
-            <li><a href="<%= similarArticle %>"><%= similarArticle %></a></li>
+        <% similarMatterArticles.forEach(function(similarMatterArticle) { %>
+            <li><a href="<%= similarMatterArticle %>"><%= similarMatterArticle %></a></li>
         <% }); %>
+      </ul>
+      <h1>Readwise Article of the Day: <a href="<%= readwiseArticleUrl %>"><%= readwiseArticleTitle %></a></h1>
+      <p>Similar Readwise Article</p>
+      <ul>
+         <% similarReadwiseArticles.forEach(function(similarReadwiseArticle) { %>
+            <li><a href="<%= similarReadwiseArticle %>"><%= similarReadwiseArticle %></a></li>
+         <% }); %>
       </ul>
    </body>
 </html>
