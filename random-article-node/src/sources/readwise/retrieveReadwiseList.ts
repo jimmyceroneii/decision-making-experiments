@@ -33,3 +33,4 @@ export const fetchDocumentListApi = async (updatedAfter=null, location=null) => 
     }
     return fullData;
 };
+

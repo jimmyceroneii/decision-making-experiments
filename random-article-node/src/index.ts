@@ -18,7 +18,9 @@ const main = async () => {
 
     console.log('sent articles of the day')
   } catch (error) {
-    console.error(`Error while sending article of the day: ${error}`)
+    console.error(`Error while sending article of the day: ${error}`);
+
+    throw error;
   }
 }
 

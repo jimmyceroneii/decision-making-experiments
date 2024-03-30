@@ -19,11 +19,11 @@ export const retrieveReadwiseArticle = async (): Promise<RetrieveReadwiseArticle
 
     console.log(randomReadwiseArticle)
 
-    console.log('Found random matter article: ', randomReadwiseArticle.title);
+    console.log('Found random readwise article: ', randomReadwiseArticle.title);
 
     const readwiseArticleUrl = randomReadwiseArticle.url;
 
-    console.log('Finding similar matter articles...')
+    console.log('Finding similar readwise articles...')
 
     const similarReadwiseArticles = await getSimilar(randomReadwiseArticle.source_url);
 
