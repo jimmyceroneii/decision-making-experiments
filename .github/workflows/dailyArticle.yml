@@ -1,4 +1,4 @@
-name: Daily Random Matter Article
+name: Daily Random Article
 
 on:
   schedule:
