@@ -1,3 +1,4 @@
+import { isValidReadwiseArticle } from './filter';
 import { ReadwiseArticle } from './types';
 
 const token = process.env.READWISE_API_TOKEN || '';
@@ -31,6 +32,14 @@ export const fetchDocumentListApi = async (updatedAfter=null, location=null) => 
         break;
       }
     }
-    return fullData;
-};
 
+    console.log('items before filtering: ', fullData.length)
+
+    console.log('filtering to only valid articles')
+
+    const filteredData = fullData.filter((data) => isValidReadwiseArticle(data));
+
+    console.log('number of articles: ', filteredData.length);
+
+    return filteredData;
+};
