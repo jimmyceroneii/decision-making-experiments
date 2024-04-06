@@ -1,4 +1,4 @@
-import { Article, articleSchema } from './types';
+import { MatterArticle, matterArticleSchema } from './types';
 import { ValidationError } from 'joi';
 import * as fs from "fs";
 import * as path from 'path';
@@ -16,9 +16,9 @@ export const convertToId = (id: string | undefined): string => {
     return id.split('_')[1].split('.')[0];
 }
 
-const convertCsvToTypedArray = async (filename: string): Promise<{ articles: Article[], errors: ValidationError[] }> => {
+const convertCsvToTypedArray = async (filename: string): Promise<{ articles: MatterArticle[], errors: ValidationError[] }> => {
     return new Promise((resolve, reject) => {
-        const articles: Article[] = [];
+        const articles: MatterArticle[] = [];
 
         const errorsArray: ValidationError[] = [];
 
@@ -49,7 +49,7 @@ const convertCsvToTypedArray = async (filename: string): Promise<{ articles: Art
                 lastInteractionDate
             };
 
-            const validationResult = articleSchema.validate(rowObject);
+            const validationResult = matterArticleSchema.validate(rowObject);
 
             if (validationResult.error) {
                 if (i < 10) {

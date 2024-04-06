@@ -1,8 +1,8 @@
 import { convertToBoolean, convertToId } from '../sources/matter/processMatterCsv';
-import { Article, articleSchema } from '../sources/matter/types';
+import { MatterArticle, matterArticleSchema } from '../sources/matter/types';
 
 describe("Article Schema", () => {
-    const validArticle: Article = {
+    const validArticle: MatterArticle = {
         id: '12341',
         title: 'Test',
         author: 'author',
@@ -31,7 +31,7 @@ describe("Article Schema", () => {
         lastInteractionDate: "2024-10-11",
     }
 
-    const articleWithNull: Article = {
+    const articleWithNull: MatterArticle = {
         id: '12341',
         title: 'Test',
         author: null,
@@ -46,7 +46,7 @@ describe("Article Schema", () => {
         lastInteractionDate: "2024-10-11",
     }
 
-    const articleWithEmptyString: Article = {
+    const articleWithEmptyString: MatterArticle = {
         id: '12341',
         title: 'Test',
         author: '',
@@ -62,13 +62,13 @@ describe("Article Schema", () => {
     }
 
     test("accepts a valid article schema", () => {
-        const validationResponse = articleSchema.validate(validArticle);
+        const validationResponse = matterArticleSchema.validate(validArticle);
 
         expect(validationResponse.error).toBeUndefined();
     });
 
     test("requires all properties to be present", () => {
-        const validationResponse = articleSchema.validate(incompleteArticle);
+        const validationResponse = matterArticleSchema.validate(incompleteArticle);
 
         console.log(validationResponse.error);
 
@@ -78,13 +78,13 @@ describe("Article Schema", () => {
     })
 
     test("allows null values for required properties", () => {
-        const validationResponse = articleSchema.validate(articleWithNull);
+        const validationResponse = matterArticleSchema.validate(articleWithNull);
 
         expect(validationResponse.error).toBeUndefined();
     })
 
     test('allows empty strings for required properties', () => {
-        const validationResponse = articleSchema.validate(articleWithEmptyString);
+        const validationResponse = matterArticleSchema.validate(articleWithEmptyString);
 
         expect(validationResponse.error).toBeUndefined();
     })

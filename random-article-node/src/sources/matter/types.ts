@@ -1,6 +1,6 @@
 import * as Joi from "joi";
 
-export const articleSchema = Joi.object({
+export const matterArticleSchema = Joi.object({
     id: Joi.string().required(),
     title: Joi.string().required(),
     author: Joi.string().allow('', null).required(),
@@ -15,7 +15,7 @@ export const articleSchema = Joi.object({
     lastInteractionDate: Joi.string().required()
 })
 
-export type Article = {
+export type MatterArticle = {
     id: string;
     title: string;
     author: string | null;

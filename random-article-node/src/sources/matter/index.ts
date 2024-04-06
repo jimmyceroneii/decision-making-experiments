@@ -1,6 +1,6 @@
 import { shuffleList } from "../../randomizer";
 import { getSimilar } from "../../search";
-import { isValidArticle } from "./filter";
+import { isValidMatterArticle } from "./filter";
 import { retrieveArticlesAndFormat } from "./processMatterCsv";
 
 type RetrieveMatterArticlesReturnType = {
@@ -19,7 +19,7 @@ export const retrieveMatterArticles = async (): Promise<RetrieveMatterArticlesRe
 
     console.log('filtering matter articles');
 
-    const filteredMatterArticles = shuffledMatterArticles.filter((article) => isValidArticle(article));
+    const filteredMatterArticles = shuffledMatterArticles.filter((article) => isValidMatterArticle(article));
 
     console.log('matter articles left after filter: ', filteredMatterArticles.length);
 
