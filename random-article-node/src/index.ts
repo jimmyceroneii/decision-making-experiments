@@ -4,11 +4,9 @@ import { retrieveReadwiseArticle } from './sources/readwise';
 
 const main = async () => {
   try {
-    const { matterArticleTitle, matterArticleUrl, similarMatterArticles } = await retrieveMatterArticles()
     const { readwiseArticleTitle, readwiseArticleUrl, similarReadwiseArticles } = await retrieveReadwiseArticle();
     
     const emailHtml = generateEmail({
-      matterArticleUrl, matterArticleTitle, similarMatterArticles,
       readwiseArticleUrl, readwiseArticleTitle, similarReadwiseArticles
     });
 
