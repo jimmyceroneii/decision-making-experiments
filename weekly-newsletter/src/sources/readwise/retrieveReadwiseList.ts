@@ -1,4 +1,3 @@
-import { isWeeklyNewsletter } from './filter';
 import { ReadwiseArticle } from './types';
 
 const token = process.env.READWISE_API_TOKEN || '';
