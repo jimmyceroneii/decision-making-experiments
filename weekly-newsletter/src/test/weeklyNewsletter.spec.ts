@@ -1,0 +1,73 @@
+import { isWeeklyNewsletter } from "../sources/readwise/filter";
+import { ReadwiseArticle, Tags } from "../sources/readwise/types";
+import { generateReadwiseTestArticle } from "./helpers";
+
+const DATE = "2024-04-04"
+
+describe('filter', () => {
+    const validTags = { DATE: { name: DATE, type: "manual", created: 10 }};
+
+    it('filters out articles without the proper tags', () => {
+        const articleList: ReadwiseArticle[] = [];
+
+        const invalidTags = { 'DATE': { name: 'DATE', type: "manual", created: 10 }};
+
+        for (let i = 0; i < 20; i++) {
+            const tags: Tags = i % 2 === 0 ? validTags : invalidTags;
+
+            articleList.push(generateReadwiseTestArticle({ tags }))
+        }
+
+        const filteredList = articleList.filter((article) => isWeeklyNewsletter(article, DATE));
+
+        expect(filteredList.length).toEqual(10);
+    })
+
+    it('filters out articles without an id', () => {
+        const articleList: ReadwiseArticle[] = [];
+
+        for (let i = 0; i < 20; i++) {
+            const id = i % 2 === 0 ? undefined : "test";
+
+            articleList.push(generateReadwiseTestArticle({ id, tags: validTags }))
+        }
+
+        for (let i = 0; i < 20; i++) {
+            const id = i % 2 === 0 ? '' : "test";
+
+            articleList.push(generateReadwiseTestArticle({ id }))
+        }
+
+        const filteredList = articleList.filter((article) => isWeeklyNewsletter(article, DATE));
+
+        expect(filteredList.length).toEqual(20);
+    })
+
+    it('filters out articles without a url', () => {
+        const articleList: ReadwiseArticle[] = [];
+
+        for (let i = 0; i < 20; i++) {
+            const url = i % 2 === 0 ? '' : "test";
+
+            articleList.push(generateReadwiseTestArticle({ url, tags: validTags }))
+        }
+
+        const filteredList = articleList.filter((article) => isWeeklyNewsletter(article, DATE));
+
+        expect(filteredList.length).toEqual(10);
+    })
+
+    it('filters out articles without a title', () => {
+        const articleList: ReadwiseArticle[] = [];
+
+        for (let i = 0; i < 20; i++) {
+            const title = i % 2 === 0 ? '' : "test";
+
+            articleList.push(generateReadwiseTestArticle({ title, tags: validTags }))
+        }
+
+        const filteredList = articleList.filter((article) => isWeeklyNewsletter(article, DATE));
+
+        expect(filteredList.length).toEqual(10);
+    })
+})

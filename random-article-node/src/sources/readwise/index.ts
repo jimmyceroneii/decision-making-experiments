@@ -1,6 +1,7 @@
 import { shuffleList } from "../../randomizer";
 import { getSimilar } from "../../search";
 import { fetchDocumentListApi } from "./retrieveReadwiseList";
+import { isValidReadwiseArticle } from "./filter";
 
 type RetrieveReadwiseArticlesReturnType = {
     readwiseArticleUrl: string;
@@ -11,9 +12,13 @@ type RetrieveReadwiseArticlesReturnType = {
 export const retrieveReadwiseArticle = async (): Promise<RetrieveReadwiseArticlesReturnType> => {
     const articles = await fetchDocumentListApi();
 
-    console.log('readwise articles: ', articles.length);
+    console.log('filtering to only valid articles')
 
-    const shuffledReadwiseArticles = shuffleList(articles);
+    const filteredArticles = articles.filter((data) => isValidReadwiseArticle(data));
+
+    console.log('number of articles after filtering: ', filteredArticles.length);
+
+    const shuffledReadwiseArticles = shuffleList(filteredArticles);
 
     const randomReadwiseArticle = shuffledReadwiseArticles[0];
 
