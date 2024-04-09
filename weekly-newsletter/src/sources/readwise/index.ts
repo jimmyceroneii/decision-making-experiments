@@ -6,10 +6,16 @@ type RetrieveReadwiseArticlesReturnType = {
     weeklyArticles: ReadwiseArticle[];
 }
 
+const DATE_TAG = '2024-04-04';
+
 export const retrieveReadwiseArticle = async (): Promise<RetrieveReadwiseArticlesReturnType> => {
     const articles = await fetchDocumentListApi();
 
-    const filteredArticles: ReadwiseArticle[] = articles.filter((article) => isWeeklyNewsletter(article, '2023-12-1'));
+    console.log('items before filtering: ', articles.length)
+
+    const filteredArticles: ReadwiseArticle[] = articles.filter((article) => isWeeklyNewsletter(article, DATE_TAG));
+
+    console.log('found weekly articles: ', filteredArticles.length);
 
     return {
         weeklyArticles: filteredArticles,

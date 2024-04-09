@@ -12,7 +12,7 @@ const resend = new Resend(process.env.RESEND_API_KEY || '');
 export const generateEmail = ({
   weeklyArticles
 }: GenerateEmailParams) => {
-  const templateString = fs.readFileSync('src/newsletter-templates/newsletter.ejs', 'utf-8');
+  const templateString = fs.readFileSync('src/newsletter-template/newsletter.ejs', 'utf-8');
 
   return ejs.render(templateString, {
     weeklyArticles

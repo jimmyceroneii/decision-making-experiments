@@ -1,20 +1,19 @@
-import { fetchDocumentListApi } from "../src/sources/readwise/retrieveReadwiseList"
-import { isWeeklyNewsletter } from "./sources/readwise/filter";
-import { ReadwiseArticle } from "./sources/readwise/types";
+import { generateEmail, sendEmail } from "./send";
+import { retrieveReadwiseArticle } from "./sources/readwise";
 
 const main = async () => {
-  const DATE_TAG = '2024-04-04';
-
   try {
-    const articles: ReadwiseArticle[] = await fetchDocumentListApi();
+    const { weeklyArticles } = await retrieveReadwiseArticle();
 
-    console.log('found total articles: ', articles.length);
+    console.log('weeklyArticles: ', weeklyArticles)
 
-    const weeklyArticles = articles.filter((article) => isWeeklyNewsletter(article, DATE_TAG));
+    console.log('\ngenerating template...');
 
-    console.log('found weekly articles: ', weeklyArticles.length);
+    const newsletterTemplate = generateEmail({weeklyArticles});
 
-    console.log(weeklyArticles.map((article) => article.title))
+    console.log('\nsending email...');
+
+    await sendEmail(newsletterTemplate);
   } catch (error) {
     console.error(`Error while setting up newsletter: ${error}`)
   }
