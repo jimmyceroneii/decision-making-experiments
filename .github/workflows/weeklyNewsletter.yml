@@ -1,12 +1,12 @@
-name: Weekly Product
+name: Weekly Newsletter
 
 on:
     schedule:
-      - cron: '0 0 * * 5' # Runs the job every Friday
+      - cron: '0 0 * * 6' # Runs the job every week on Saturday
     workflow_dispatch: # allow for manual trigger
   
 jobs:
-    send-weekly-product:
+    send-weekly-newsletter:
         runs-on: ubuntu-latest
         environment:
             name: Production
@@ -14,6 +14,7 @@ jobs:
         env:
             EXA_API_KEY: ${{ secrets.EXA_API_KEY }}
             RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+            READWISE_API_TOKEN: ${{ secrets.READWISE_API_TOKEN }}
         
         steps:
             - name: Checkout code
@@ -25,7 +26,7 @@ jobs:
                 node-version: '18'
             
             - name: Install dependencies
-              run: cd ./random-product-node && yarn
+              run: cd ./weekly-newsletter && yarn
 
             - name: Run script
-              run: cd ./random-product-node && yarn start
+              run: cd ./weekly-newsletter && yarn start
