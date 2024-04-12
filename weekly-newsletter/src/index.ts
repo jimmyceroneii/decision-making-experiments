@@ -5,7 +5,7 @@ const main = async () => {
   try {
     const { weeklyArticles } = await retrieveReadwiseArticle();
 
-    console.log('weeklyArticles: ', weeklyArticles)
+    console.log('weeklyArticles: ', weeklyArticles.map((article) => article.title))
 
     console.log('\ngenerating template...');
 

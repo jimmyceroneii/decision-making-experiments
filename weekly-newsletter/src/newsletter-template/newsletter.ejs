@@ -1,12 +1,6 @@
-<html>
-   <body>
-      <h1>Weekly Newsletter Template</h1>
-      <ul>
+## Weekly Newsletter Template
+
          <% weeklyArticles.forEach(function(article) { %>
-            <li><a href="<%= article.url %>">
-                  <%= article.title %>
-               </a></li>
+            - [<%= article.title %>](<%= article.url %>)
+
          <% }); %>
-      </ul>
-   </body>
-</html>
