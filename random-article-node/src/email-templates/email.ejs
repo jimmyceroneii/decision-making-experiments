@@ -3,8 +3,8 @@
       <h1>Readwise Article of the Day: <a href="<%= readwiseArticleUrl %>"><%= readwiseArticleTitle %></a></h1>
       <p>Similar Readwise Article</p>
       <ul>
-         <% similarReadwiseArticles.forEach(function(similarReadwiseArticle) { %>
-            <li><a href="<%= similarReadwiseArticle %>"><%= similarReadwiseArticle %></a></li>
+         <% relatedArticles.forEach(function(relatedArticle) { %>
+            <li><a href="<%= relatedArticle.url %>"><%= relatedArticle.title %></a></li>
          <% }); %>
       </ul>
    </body>

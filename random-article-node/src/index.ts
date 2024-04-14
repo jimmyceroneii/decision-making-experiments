@@ -3,10 +3,10 @@ import { retrieveReadwiseArticle } from './sources/readwise';
 
 const main = async () => {
   try {
-    const { readwiseArticleTitle, readwiseArticleUrl, similarReadwiseArticles } = await retrieveReadwiseArticle();
+    const { readwiseArticleTitle, readwiseArticleUrl, relatedArticles } = await retrieveReadwiseArticle();
     
     const emailHtml = generateEmail({
-      readwiseArticleUrl, readwiseArticleTitle, similarReadwiseArticles
+      readwiseArticleUrl, readwiseArticleTitle, relatedArticles
     });
 
     console.log('sending email with daily article...')

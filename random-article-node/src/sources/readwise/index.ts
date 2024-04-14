@@ -1,12 +1,13 @@
 import { shuffleList } from "../../randomizer";
-import { getSimilar } from "../../search";
+import { search } from "../../search";
 import { fetchDocumentListApi } from "./retrieveReadwiseList";
 import { isValidReadwiseArticle } from "./filter";
+import { DocumentContent } from "metaphor-node";
 
 type RetrieveReadwiseArticlesReturnType = {
     readwiseArticleUrl: string;
     readwiseArticleTitle: string;
-    similarReadwiseArticles: string[];
+    relatedArticles: DocumentContent[];
 }
 
 export const retrieveReadwiseArticle = async (): Promise<RetrieveReadwiseArticlesReturnType> => {
@@ -27,19 +28,14 @@ export const retrieveReadwiseArticle = async (): Promise<RetrieveReadwiseArticle
     console.log('Found random readwise article: ', randomReadwiseArticle.title);
 
     const readwiseArticleUrl = randomReadwiseArticle.url;
-    const readwiseSourceUrl = randomReadwiseArticle.source_url;
 
-    console.log('Finding similar readwise articles...')
+    console.log('Finding related articles...')
 
-    let similarReadwiseArticles: string[] = [];
-
-    if (readwiseSourceUrl) {
-        similarReadwiseArticles = await getSimilar(randomReadwiseArticle.source_url);
-    }
+    const relatedArticles = await search(randomReadwiseArticle);
 
     return {
         readwiseArticleUrl,
         readwiseArticleTitle: randomReadwiseArticle.title || readwiseArticleUrl,
-        similarReadwiseArticles
+        relatedArticles
     }
 }
