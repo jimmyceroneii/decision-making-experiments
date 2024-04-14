@@ -16,9 +16,29 @@ export const getSimilar = async (url: string) => {
 }
 
 export const search = async (article: ReadwiseArticle): Promise<DocumentContent[]> => {
+  console.log("title: ", article.title)
+
   const searchResults = await metaphor.search(article.title);
 
   const rawSearch = await metaphor.getContents(searchResults.results);
 
   return rawSearch.contents;
+}
+
+export const fetchSearch = async (article: ReadwiseArticle): Promise<DocumentContent[]> => {
+  const options = {
+    method: 'POST',
+    headers: {
+      accept: 'application/json',
+      'content-type': 'application/json',
+      'x-api-key': process.env.EXA_API_KEY ?? ''
+    },
+    body: JSON.stringify({ query: article.title })
+  };
+  
+  const rawSearchResults = await fetch('https://api.exa.ai/search', options);
+
+  const searchResults = await rawSearchResults.json();
+
+  return searchResults.results;
 }

@@ -1,5 +1,5 @@
 import { shuffleList } from "../../randomizer";
-import { search } from "../../search";
+import { fetchSearch, search } from "../../search";
 import { fetchDocumentListApi } from "./retrieveReadwiseList";
 import { isValidReadwiseArticle } from "./filter";
 import { DocumentContent } from "metaphor-node";
@@ -31,7 +31,7 @@ export const retrieveReadwiseArticle = async (): Promise<RetrieveReadwiseArticle
 
     console.log('Finding related articles...')
 
-    const relatedArticles = await search(randomReadwiseArticle);
+    const relatedArticles = await fetchSearch(randomReadwiseArticle);
 
     return {
         readwiseArticleUrl,
