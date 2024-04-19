@@ -8,4 +8,4 @@ Right now I'm focused on decisions as they pertain to:
 - Movies
 - Cities
 
-To start, I'm just using randomness as the decision criteria. Going forward I hope to add more ways to decide. 
+To start, I'm just using randomness as the decision criteria. Going forward I hope to add more ways to decide. I want to add a UI. 
