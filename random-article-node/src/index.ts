@@ -1,12 +1,15 @@
 import { generateEmail, sendEmail } from './send';
+import { retrieveMatterArticles } from './sources/matter';
 import { retrieveReadwiseArticle } from './sources/readwise';
 
 const main = async () => {
   try {
     const { readwiseArticleTitle, readwiseArticleUrl, relatedArticles } = await retrieveReadwiseArticle();
+    const { matterArticleTitle, matterArticleUrl, similarMatterArticles } = await retrieveMatterArticles()
     
     const emailHtml = generateEmail({
-      readwiseArticleUrl, readwiseArticleTitle, relatedArticles
+      readwiseArticleUrl, readwiseArticleTitle, relatedArticles,
+      matterArticleUrl, matterArticleTitle, similarMatterArticles
     });
 
     console.log('sending email with daily article...')

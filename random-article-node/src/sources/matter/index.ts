@@ -29,15 +29,13 @@ export const retrieveMatterArticles = async (): Promise<RetrieveMatterArticlesRe
 
     console.log('Found random matter article: ', randomMatterArticle.title);
 
-    const matterArticleUrl = 'https://web.getmatter.com/entry/' + randomMatterArticle.id;
-
     console.log('Finding similar matter articles...')
 
     const similarMatterArticles = await getSimilar(randomMatterArticle.url);
 
     return {
-        matterArticleUrl,
-        matterArticleTitle: randomMatterArticle.title || matterArticleUrl,
+        matterArticleUrl: randomMatterArticle.url,
+        matterArticleTitle: randomMatterArticle.title || randomMatterArticle.url,
         similarMatterArticles
     }
 }
