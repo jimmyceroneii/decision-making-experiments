@@ -21,6 +21,8 @@ const getDateTag = () => {
 export const retrieveReadwiseArticle = async (): Promise<RetrieveReadwiseArticlesReturnType> => {
     const dateTag = getDateTag();
 
+    console.log('retrieving for date: ', dateTag);
+
     const articles = await fetchDocumentListApi();
 
     console.log('items before filtering: ', articles.length)

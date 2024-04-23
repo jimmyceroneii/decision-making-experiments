@@ -1,9 +1,5 @@
 import * as Joi from "joi";
 
-const dateFormatRegex = /^\d{4}-\d{2}-\d{2}$/;
-
-export const weekSchema = Joi.string().regex(dateFormatRegex).required()
-
 export const readwiseArticleSchema = Joi.object({
     id: Joi.string().required(),
     url: Joi.string().required(),

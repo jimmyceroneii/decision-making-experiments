@@ -1,17 +1,8 @@
-import { ReadwiseArticle, weekSchema } from "./types";
+import { ReadwiseArticle } from "./types";
 
 export const isWeeklyNewsletter = (article: ReadwiseArticle, week: string): boolean => {
     // if there are no tags this is not it
     if (!article.tags) return false;
-
-    const validationResult = weekSchema.validate(week);
-
-    // if the week is not valid, we are in trouble
-    if (validationResult.error) {
-        console.log('error: ', JSON.stringify(validationResult.error.details))
-
-        return false;
-    }
 
     // if the week is not in the tags, not valid
     let isWeekTag = false;
