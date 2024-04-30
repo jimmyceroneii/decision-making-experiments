@@ -1,12 +1,17 @@
 import { retrieveBooksAndFormat } from '../sources/goodreads/processGoodreadsCsv';
 import { shuffleList } from './randomizer';
+import { generateEmail, sendEmail } from './send';
 
 const main = async () => {
+    console.log("retrieving books...\n")
+
     const { books, errors } = await retrieveBooksAndFormat();
 
     if (errors.length > 0) {
         console.log(errors);
     }
+
+    console.log('getting random book...\n')
     
     const randomBookList = shuffleList(books);
 
@@ -16,7 +21,11 @@ const main = async () => {
 
     const alibrisSearchUrl = `https://www.alibris.com/booksearch?keyword=${randomBookFormattedTitle}`;
 
-    console.log(alibrisSearchUrl);
+    console.log('sending email for book...\n');
+
+    const emailBody = generateEmail({ book: randomBook, bookUrl: alibrisSearchUrl });
+
+    await sendEmail(emailBody);
 }
 
 main();
