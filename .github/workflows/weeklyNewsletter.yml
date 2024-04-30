@@ -2,7 +2,7 @@ name: Weekly Newsletter
 
 on:
     schedule:
-      - cron: '0 21 1,8,15,22' # Runs the job on the 1st, 8th, 15th, and 22nd
+      - cron: '0 21 1,8,15,22 * *' # Runs the job on the 1st, 8th, 15th, and 22nd
     workflow_dispatch: # allow for manual trigger
   
 jobs:
