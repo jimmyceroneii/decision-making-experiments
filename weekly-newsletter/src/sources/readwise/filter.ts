@@ -1,6 +1,6 @@
 import { ReadwiseArticle } from "./types";
 
-export const isWeeklyNewsletter = (article: ReadwiseArticle, week: string): boolean => {
+export const isWeeklyNewsletter = (article: ReadwiseArticle): boolean => {
     // if there are no tags this is not it
     if (!article.tags) return false;
 
@@ -8,7 +8,7 @@ export const isWeeklyNewsletter = (article: ReadwiseArticle, week: string): bool
     let isWeekTag = false;
 
     for (const tag of Object.keys(article.tags)) {
-        if (tag === week) {
+        if (tag === 'newsletter') {
             isWeekTag = true;
         }
     }

@@ -9,21 +9,21 @@ jobs:
     send-weekly-book:
         runs-on: ubuntu-latest
         environment: 
-            name: production
+          name: production
         
         env: 
-            RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
         
         steps:
-            - name: Checkout code
-              uses: actions/checkout@v2
+          - name: Checkout code
+            uses: actions/checkout@v2
 
-            - name: Setup node.js
-              uses: action/setup-node@v4
+          - name: Setup node.js
+            uses: action/setup-node@v4
 
-            - name: Install dependencies
-              run: cd ./random-book-node && yarn
+          - name: Install dependencies
+            run: cd ./random-book-node && yarn
 
-            - name: Run script
-              run: cd ./random-book-node && yarn start
-            
+          - name: Run script
+            run: cd ./random-book-node && yarn start
+          
