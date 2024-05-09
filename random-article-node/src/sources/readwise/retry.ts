@@ -14,7 +14,7 @@ export const sendRequestWithRetry = async <T>(url: string, retries: number = 0):
         });
         const data = await response.json();
 
-        if (data['detail'].includes('throttled')) {
+        if ('detail' in data && data['detail'].includes('throttled')) {
             throw new Error(`throttled on retry #${retries}...`);
         }
 
