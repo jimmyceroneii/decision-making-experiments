@@ -1,6 +1,5 @@
+import { sendRequestWithRetry } from './retry';
 import { ReadwiseArticle } from './types';
-
-const token = process.env.READWISE_API_TOKEN || '';
 
 export const fetchDocumentListApi = async (updatedAfter=null, location=null) => {
     let fullData: ReadwiseArticle[] = [];
@@ -18,15 +17,9 @@ export const fetchDocumentListApi = async (updatedAfter=null, location=null) => 
         queryParams.append('location', location);
       }
       console.log('Making export api request with params ' + queryParams.toString());
-      const response = await fetch('https://readwise.io/api/v3/list/?' + queryParams.toString(), {
-        method: 'GET',
-        headers: {
-          Authorization: `Token ${token}`,
-        },
-      });
-      const responseJson = await response.json();
-      fullData.push(...responseJson['results']);
-      nextPageCursor = responseJson['nextPageCursor'];
+      const response = await sendRequestWithRetry<{ results: ReadwiseArticle[], nextPageCursor: string }>('https://readwise.io/api/v3/list/?' + queryParams.toString());
+      fullData.push(...response['results']);
+      nextPageCursor = response['nextPageCursor'];
       if (!nextPageCursor) {
         break;
       }
