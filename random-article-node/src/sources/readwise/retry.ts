@@ -1,4 +1,4 @@
-const MAX_RETRIES = 5;
+const MAX_RETRIES = 100;
 const INITIAL_BACKOFF = 60010; // in milliseconds
 
 const token = process.env.READWISE_API_TOKEN || '';
