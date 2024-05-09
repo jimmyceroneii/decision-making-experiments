@@ -5,7 +5,6 @@ const token = process.env.READWISE_API_TOKEN || '';
 
 export const sendRequestWithRetry = async <T>(url: string, retries: number = 0): Promise<T> => {
     try {
-        console.log('token: ', token)
         const response = await fetch(url, {
             method: 'GET',
             headers: {
