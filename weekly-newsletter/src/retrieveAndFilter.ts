@@ -1,6 +1,6 @@
-import { isWeeklyNewsletter } from "./filter";
-import { fetchDocumentListApi } from "./retrieveReadwiseList";
-import { ReadwiseArticle } from "./types";
+import { isWeeklyNewsletter } from "../../sources/readwise-reader/filter";
+import { fetchDocumentListApi } from "../../sources/readwise-reader/fetch";
+import { ReadwiseArticle } from "../../sources/readwise-reader/types";
 
 type RetrieveReadwiseArticlesReturnType = {
     weeklyArticles: ReadwiseArticle[];
