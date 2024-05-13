@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import { shuffleList } from './randomizer';
+import { shuffleList } from '../../utils/randomizer';
 
 const main = async () => {
   const filePath: string = 'src/movies.txt'
