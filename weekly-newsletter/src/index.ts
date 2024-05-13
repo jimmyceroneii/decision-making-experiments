@@ -16,6 +16,7 @@ const main = async () => {
     await sendEmail(newsletterTemplate);
   } catch (error) {
     console.error(`Error while setting up newsletter: ${error}`)
+    throw error;
   }
 }
 
