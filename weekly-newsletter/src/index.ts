@@ -1,5 +1,5 @@
 import { sendEmail } from "../../utils/send";
-import { generateEmail } from "./send";
+import { generateEmail } from "./generate-email";
 import { retrieveReadwiseArticle } from "./retrieveAndFilter";
 
 const main = async () => {

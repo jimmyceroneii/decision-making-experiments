@@ -1,7 +1,8 @@
 import * as fs from 'fs';
-import { shuffleList } from './randomizer';
+import { shuffleList } from '../../utils/randomizer';
 import { getSimilar, searchForContent } from './search';
-import { generateEmail, sendEmail } from './send';
+import { generateEmail } from './generate-email';
+import { sendEmail } from '../../utils/send';
 
 const main = async () => {
   const filePath: string = 'src/products.txt'
