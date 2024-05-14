@@ -1,4 +1,5 @@
-import { generateEmail, sendEmail } from './send';
+import { generateEmail } from './generate-email';
+import { sendEmail } from '../../../utils/send';
 import { retrieveMatterArticles } from './sources/matter';
 import { retrieveReadwiseArticle } from './sources/readwise';
 

@@ -1,5 +1,5 @@
-import { shuffleList } from "../../randomizer";
-import { fetchSearch, search } from "../../search";
+import { shuffleList } from "../../../../../utils/randomizer";
+import { fetchSearch } from "../../search";
 import { fetchDocumentListApi } from "./retrieveReadwiseList";
 import { isValidReadwiseArticle } from "./filter";
 import { DocumentContent } from "metaphor-node";

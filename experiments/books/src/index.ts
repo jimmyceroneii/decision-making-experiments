@@ -1,6 +1,7 @@
 import { retrieveBooksAndFormat } from '../sources/goodreads/processGoodreadsCsv';
-import { shuffleList } from './randomizer';
-import { generateEmail, sendEmail } from './send';
+import { shuffleList } from '../../../utils/randomizer';
+import { sendEmail } from '../../../utils/send';
+import { generateEmail } from './generate-email';
 
 const main = async () => {
     console.log("retrieving books...\n")
