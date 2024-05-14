@@ -1,5 +1,4 @@
 import Metaphor, { DocumentContent } from 'metaphor-node'
-import { ReadwiseArticle } from './sources/readwise/types';
 
 const metaphor = new Metaphor(process.env.EXA_API_KEY || '')
 
@@ -16,7 +15,7 @@ export const getSimilar = async (url: string) => {
 }
 
 
-export const fetchSearch = async (article: ReadwiseArticle): Promise<DocumentContent[]> => {
+export const fetchSearch = async (searchTerm: string): Promise<DocumentContent[]> => {
   const options = {
     method: 'POST',
     headers: {
@@ -24,7 +23,7 @@ export const fetchSearch = async (article: ReadwiseArticle): Promise<DocumentCon
       'content-type': 'application/json',
       'x-api-key': process.env.EXA_API_KEY ?? ''
     },
-    body: JSON.stringify({ query: article.title })
+    body: JSON.stringify({ query: searchTerm })
   };
   
   const rawSearchResults = await fetch('https://api.exa.ai/search', options);
