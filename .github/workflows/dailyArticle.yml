@@ -26,7 +26,7 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: cd ./random-article-node && yarn
+        run: yarn
   
       - name: Run script
-        run: cd ./random-article-node && yarn start
+        run: npx ts-node experiments/articles/index.ts
