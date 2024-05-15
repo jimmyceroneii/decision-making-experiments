@@ -26,7 +26,7 @@ jobs:
                 node-version: '18'
             
             - name: Install dependencies
-              run: cd yarn
+              run: yarn
 
             - name: Run script
               run: npx ts-node experiments/newsletter/index.ts
