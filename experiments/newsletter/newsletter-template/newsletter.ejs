@@ -1,6 +1,7 @@
-## Weekly Newsletter Template
-
-         <% weeklyArticles.forEach(function(article) { %>
-            - [<%= article.title %>](<%= article.url %>)
-
-         <% }); %>
+<ol>
+   <% weeklyArticles.forEach(function(article) { %>
+      <li>
+         - [<%= article.title %>](<%= article.url %>)
+      </li>
+   <% }); %>
+</ol>
