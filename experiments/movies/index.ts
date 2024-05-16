@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import { shuffleList } from '../../utils/randomizer';
 
 const main = async () => {
-  const filePath: string = 'src/movies.txt'
+  const filePath: string = 'sources/movies-netflix-export/movies.txt'
 
   try {
     const fileContent: string = fs.readFileSync(filePath, 'utf-8')
