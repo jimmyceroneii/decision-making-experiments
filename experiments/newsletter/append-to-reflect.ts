@@ -3,7 +3,7 @@ const REFLECT_ACCESS_TOKEN = process.env.REFLECT_ACCESS_TOKEN;
 export const appendToReflect = async (text: string) => {
     try { 
         const response = await fetch(
-            "https://reflect.app/api/graphs/{graphId}/daily-notes",
+            "https://reflect.app/api/graphs/jimmyceroneii/daily-notes",
             {
             method: "PUT",
             headers: {
@@ -23,3 +23,9 @@ export const appendToReflect = async (text: string) => {
         throw e;
     }
 }
+
+const main = async () => {
+    await appendToReflect('test');
+}
+
+main()
