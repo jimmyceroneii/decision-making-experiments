@@ -1,5 +1,5 @@
 import Chance from 'chance';
-import { CATEGORIES, ReadwiseArticle } from '../sources/readwise/types';
+import { CATEGORIES, ReadwiseArticle } from '../../../sources/readwise-reader/types';
 
 const chance = new Chance();
 
