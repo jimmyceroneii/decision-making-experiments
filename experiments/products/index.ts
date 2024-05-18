@@ -5,7 +5,7 @@ import { generateEmail } from './generate-email';
 import { sendEmail } from '../../utils/send';
 
 const main = async () => {
-  const filePath: string = 'src/products.txt'
+  const filePath: string = 'sources/products-reminders-export/products.txt'
 
   try {
     const fileContent: string = fs.readFileSync(filePath, 'utf-8')
