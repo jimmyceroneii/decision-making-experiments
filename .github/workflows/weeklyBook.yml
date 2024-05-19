@@ -22,8 +22,8 @@ jobs:
             uses: actions/setup-node@v4
 
           - name: Install dependencies
-            run: cd ./random-book-node && yarn
+            run: yarn
 
           - name: Run script
-            run: cd ./random-book-node && yarn start
+            run: npx ts-node experiments/books/index.ts
           

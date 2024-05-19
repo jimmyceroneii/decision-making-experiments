@@ -1,4 +1,4 @@
-import { retrieveBooksAndFormat } from '../sources/goodreads/processGoodreadsCsv';
+import { retrieveBooksAndFormat } from '../../../sources/goodreads/processGoodreadsCsv';
 import { shuffleList } from '../../../utils/randomizer';
 import { sendEmail } from '../../../utils/send';
 import { generateEmail } from './generate-email';
