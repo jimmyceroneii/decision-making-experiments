@@ -1,4 +1,4 @@
-import { sendRequestWithRetry } from './retry';
+import { sendRequestWithRetry } from '../../../../utils/retry';
 import { ReadwiseArticle } from './types';
 
 export const fetchDocumentListApi = async (updatedAfter=null, location=null) => {
