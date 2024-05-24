@@ -1,4 +1,5 @@
 import { sendRequestWithRetry } from '../../../../utils/retry';
+import { writeArrayToFile } from '../../../../utils/writeFile';
 import { ReadwiseArticle } from './types';
 
 export const fetchDocumentListApi = async (updatedAfter=null, location=null) => {
@@ -25,7 +26,9 @@ export const fetchDocumentListApi = async (updatedAfter=null, location=null) => 
       }
     }
 
-    console.log('items before filtering: ', fullData.length)
+    console.log('items before filtering: ', fullData.length);
+
+    writeArrayToFile<ReadwiseArticle>({ filePath: "experiments/articles/sources/readwise/backup.json", array: fullData })
 
     return fullData;
 };
