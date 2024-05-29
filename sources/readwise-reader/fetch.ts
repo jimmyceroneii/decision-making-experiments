@@ -28,7 +28,7 @@ export const fetchDocumentListApi = async (updatedAfter=null, location=null) => 
 
     console.log('items before filtering: ', fullData.length);
 
-    writeArrayToFile<ReadwiseArticle>({ filePath: "experiments/articles/sources/readwise/backup.json", array: fullData })
+    writeArrayToFile<ReadwiseArticle>({ filePath: "sources/readwise-reader/backup.json", array: fullData })
 
     return fullData;
 };

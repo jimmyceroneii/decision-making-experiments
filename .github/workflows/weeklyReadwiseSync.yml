@@ -1,0 +1,31 @@
+name: Weekly Readwise Sync
+
+on:
+    schedule:
+        - cron: '0 0 * * 5'
+    workflow_dispatch:
+
+jobs:
+    weekly-readwise-sync:
+      runs-on: ubuntu-latest
+      environment:
+            name: Production
+   
+      env:
+        EXA_API_KEY: ${{ secrets.EXA_API_KEY }}
+        READWISE_API_TOKEN: ${{ secrets.READWISE_API_TOKEN }}
+
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
+        
+        - name: Set up Node.js
+          uses: actions/setup-node@v4
+          with: 
+            node-version: '18'
+
+        - name: Install deps
+          run: yarn
+
+        - name: run script
+          run: npx ts-node scripts/readwiseSyncToFile.ts
