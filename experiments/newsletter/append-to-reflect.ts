@@ -5,9 +5,9 @@ const REFLECT_ACCESS_TOKEN = process.env.REFLECT_ACCESS_TOKEN;
 
 export const appendToReflect = async (text: string) => {
     try { 
-        const today = new Date().toLocaleDateString()
+        const today = new Date().toLocaleDateString() + " Newsletter"
 
-        const response = await fetch(
+        await fetch(
             "https://reflect.app/api/graphs/jimmyceroneii/notes",
             {
             method: "POST",
@@ -21,21 +21,8 @@ export const appendToReflect = async (text: string) => {
             }),
             }
         );
-
-        console.log(response.status)
-        console.log(await response.json())
     } catch (e) {
         console.log('error when adding to reflect: ', e);
         throw e;
     }
 }
-
-const main = async () => {
-    const article = generateReadwiseTestArticle({});
-
-    const markdown = generateEmail({ weeklyArticles: [ article ] })
-
-    await appendToReflect(markdown);
-}
-
-main()

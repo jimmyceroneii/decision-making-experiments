@@ -9,7 +9,7 @@ type GenerateEmailParams = {
 export const generateEmail = ({
   weeklyArticles
 }: GenerateEmailParams) => {
-  const templateString = fs.readFileSync('experiments/newsletter/newsletter-template/newsletter.ejs', 'utf-8');
+  const templateString = fs.readFileSync('experiments/newsletter/newsletter-template/newsletter-md.ejs', 'utf-8');
 
   return ejs.render(templateString, {
     weeklyArticles
