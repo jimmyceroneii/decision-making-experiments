@@ -1,41 +1,48 @@
-import { shuffleList } from "../../../../utils/randomizer";
-import { getSimilar } from "../../../../utils/search";
-import { isValidMatterArticle } from "./filter";
-import { retrieveArticlesAndFormat } from "./processMatterCsv";
+import { shuffleList } from '../../../../utils/randomizer'
+import { fetchSimilar } from '../../../../utils/search'
+import { isValidMatterArticle } from './filter'
+import { retrieveArticlesAndFormat } from './processMatterCsv'
 
 type RetrieveMatterArticlesReturnType = {
-    matterArticleUrl: string;
-    matterArticleTitle: string;
-    similarMatterArticles: string[];
+  matterArticleUrl: string
+  matterArticleTitle: string
+  similarMatterArticles: string[]
 }
 
-export const retrieveMatterArticles = async (): Promise<RetrieveMatterArticlesReturnType> => {
-    const { articles: matterArticles, errors } = await retrieveArticlesAndFormat();
+export const retrieveMatterArticles =
+  async (): Promise<RetrieveMatterArticlesReturnType> => {
+    const { articles: matterArticles, errors } =
+      await retrieveArticlesAndFormat()
 
-    console.log('matter articles: ', matterArticles.length);
-    console.log('matter errors: ', errors.length);
+    console.log('matter articles: ', matterArticles.length)
+    console.log('matter errors: ', errors.length)
 
-    const shuffledMatterArticles = shuffleList(matterArticles);
+    const shuffledMatterArticles = shuffleList(matterArticles)
 
-    console.log('filtering matter articles');
+    console.log('filtering matter articles')
 
-    const filteredMatterArticles = shuffledMatterArticles.filter((article) => isValidMatterArticle(article));
+    const filteredMatterArticles = shuffledMatterArticles.filter((article) =>
+      isValidMatterArticle(article),
+    )
 
-    console.log('matter articles left after filter: ', filteredMatterArticles.length);
+    console.log(
+      'matter articles left after filter: ',
+      filteredMatterArticles.length,
+    )
 
-    const randomMatterArticle = filteredMatterArticles[0];
+    const randomMatterArticle = filteredMatterArticles[0]
 
     console.log(randomMatterArticle)
 
-    console.log('Found random matter article: ', randomMatterArticle.title);
+    console.log('Found random matter article: ', randomMatterArticle.title)
 
     console.log('Finding similar matter articles...')
 
-    const similarMatterArticles = await getSimilar(randomMatterArticle.url);
+    const similarMatterArticles = await fetchSimilar(randomMatterArticle.url)
 
     return {
-        matterArticleUrl: randomMatterArticle.url,
-        matterArticleTitle: randomMatterArticle.title || randomMatterArticle.url,
-        similarMatterArticles
+      matterArticleUrl: randomMatterArticle.url,
+      matterArticleTitle: randomMatterArticle.title || randomMatterArticle.url,
+      similarMatterArticles,
     }
-}
+  }

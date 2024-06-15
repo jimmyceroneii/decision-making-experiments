@@ -1,21 +1,24 @@
-import Metaphor, { DocumentContent } from 'metaphor-node'
+import { DocumentContent, Result } from './types'
+
 import * as dotenv from 'dotenv'
 dotenv.config()
 
-const metaphor = new Metaphor(process.env.EXA_API_KEY || '')
+export const fetchSimilar = async (url: string): Promise<string[]> => {
+  const options = {
+    method: 'POST',
+    headers: {
+      accept: 'application/json',
+      'content-type': 'application/json',
+      'x-api-key': process.env.EXA_API_KEY ?? '',
+    },
+    body: JSON.stringify({ url }),
+  }
 
-export const getSimilar = async (url: string) => {
-  const similarResponse = await metaphor.findSimilar(url, {
-    numResults: 10,
-  })
+  const rawSimilar = await fetch('https://api.exa.ai/findSimilar', options)
 
-  const rawSimilar = await metaphor.getContents(similarResponse.results)
+  const similar: { results: Result[] } = await rawSimilar.json()
 
-  const processedSimilar: string[] = rawSimilar.contents.map(
-    (content) => content.url,
-  )
-
-  return processedSimilar
+  return similar.results.map((result) => result.url)
 }
 
 export const fetchSearch = async (

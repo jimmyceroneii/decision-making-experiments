@@ -2,7 +2,7 @@ import * as fs from 'fs'
 import { shuffleList } from '../../utils/randomizer'
 import { generateEmail } from './generate-email'
 import { sendEmail } from '../../utils/send'
-import { fetchSearch, getSimilar } from '../../utils/search'
+import { fetchSearch, fetchSimilar } from '../../utils/search'
 
 const main = async () => {
   const filePath: string = 'sources/products-reminders-export/products.txt'
@@ -27,7 +27,7 @@ const main = async () => {
 
     console.log('Finding similar products...')
 
-    const similar = await getSimilar(randomProduct)
+    const similar = await fetchSimilar(randomProduct)
 
     console.log('Similar: ', similar)
 

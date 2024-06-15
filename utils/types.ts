@@ -6,3 +6,12 @@ export interface DocumentContent {
   text?: string
   author?: string | null
 }
+
+export interface Result {
+  title: string
+  url: string
+  publishedDate?: string
+  author?: string
+  score?: number
+  id: string
+}
