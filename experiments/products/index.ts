@@ -1,9 +1,8 @@
 import * as fs from 'fs'
 import { shuffleList } from '../../utils/randomizer'
-import { getSimilar } from './search'
 import { generateEmail } from './generate-email'
 import { sendEmail } from '../../utils/send'
-import { fetchSearch } from '../../utils/search'
+import { fetchSearch, getSimilar } from '../../utils/search'
 
 const main = async () => {
   const filePath: string = 'sources/products-reminders-export/products.txt'
