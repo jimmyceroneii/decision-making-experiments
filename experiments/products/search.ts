@@ -4,26 +4,6 @@ dotenv.config()
 
 const metaphor = new Metaphor(process.env.EXA_API_KEY || '')
 
-export const searchForContent = async (query: string) => {
-  console.log('👍 1')
-
-  const searchResponse = await metaphor.search(query)
-
-  console.log('👍 2: ', JSON.stringify(searchResponse.results))
-
-  const rawContents = await metaphor.getContents(searchResponse.results)
-
-  console.log('👍 3')
-
-  const processedContents: string[] = rawContents.contents.map(
-    (content) => content.url,
-  )
-
-  console.log('👍 4')
-
-  return processedContents
-}
-
 export const getSimilar = async (url: string) => {
   const similarResponse = await metaphor.findSimilar(url, {
     numResults: 10,

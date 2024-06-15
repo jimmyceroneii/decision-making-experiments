@@ -1,8 +1,9 @@
-import * as fs from 'fs';
-import { shuffleList } from '../../utils/randomizer';
-import { getSimilar, searchForContent } from './search';
-import { generateEmail } from './generate-email';
-import { sendEmail } from '../../utils/send';
+import * as fs from 'fs'
+import { shuffleList } from '../../utils/randomizer'
+import { getSimilar } from './search'
+import { generateEmail } from './generate-email'
+import { sendEmail } from '../../utils/send'
+import { fetchSearch } from '../../utils/search'
 
 const main = async () => {
   const filePath: string = 'sources/products-reminders-export/products.txt'
@@ -11,25 +12,29 @@ const main = async () => {
     const fileContent: string = fs.readFileSync(filePath, 'utf-8')
     const products: string[] = fileContent.split('\n')
 
-    const randomProduct = shuffleList(products)[0];
+    const randomProduct = shuffleList(products)[0]
 
-    console.log('Product: ', randomProduct);
+    console.log('Product: ', randomProduct)
 
     console.log('Finding news stories...')
 
-    const sources = await searchForContent(`Here is some information about the following product: ${randomProduct}`);
+    const sources = await fetchSearch(
+      `Here is some information about the following product: ${randomProduct}`,
+    )
 
-    console.log('Sources: ', sources);
+    const sourceUrls = sources.map((source) => source.url)
+
+    console.log('Sources: ', sourceUrls)
 
     console.log('Finding similar products...')
 
-    const similar = await getSimilar(randomProduct);
-    
-    console.log('Similar: ', similar);
-    
-    const emailHtml = generateEmail(randomProduct, sources, similar);
+    const similar = await getSimilar(randomProduct)
 
-    await sendEmail(emailHtml);
+    console.log('Similar: ', similar)
+
+    const emailHtml = generateEmail(randomProduct, sourceUrls, similar)
+
+    await sendEmail(emailHtml)
 
     console.log('sent product of the week')
   } catch (error) {
