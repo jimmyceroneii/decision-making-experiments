@@ -1,8 +1,8 @@
-import { shuffleList } from '../../../../utils/randomizer'
-import { fetchSearch } from '../../../../utils/search'
-import { fetchDocumentListApi } from './retrieveReadwiseList'
-import { isValidReadwiseArticle } from './filter'
-import { DocumentContent } from '../../../../utils/types'
+import { fetchDocumentListApi } from '../../sources/readwise-reader/fetch'
+import { isValidReadwiseArticle } from '../../sources/readwise-reader/filter'
+import { shuffleList } from '../../utils/randomizer'
+import { fetchSearch } from '../../utils/search'
+import { DocumentContent } from '../../utils/types'
 
 type RetrieveReadwiseArticlesReturnType = {
   readwiseArticleUrl: string

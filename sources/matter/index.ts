@@ -1,5 +1,5 @@
-import { shuffleList } from '../../../../utils/randomizer'
-import { fetchSimilar } from '../../../../utils/search'
+import { shuffleList } from '../../utils/randomizer'
+import { fetchSimilar } from '../../utils/search'
 import { isValidMatterArticle } from './filter'
 import { retrieveArticlesAndFormat } from './processMatterCsv'
 
