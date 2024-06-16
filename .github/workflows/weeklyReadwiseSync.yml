@@ -19,6 +19,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Determine branch name based on date
+        id: determine-branch
+        run: |
+          DATE=$(date +"%Y%m%d")
+          BRANCH_NAME="branch-${DATE}"
+          echo "::set-output name=branch::${BRANCH_NAME}"
+
+      - name: Create new branch
+        run: |
+          git checkout -b ${{ steps.determine-branch.outputs.branch }}
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -41,4 +52,15 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.PAT_GITHUB }}
+
+      - name: Create Pull Request
+        id: create_pr
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.PAT_GITHUB }}
+          branch: ${{ steps.determine-branch.outputs.branch }}
+          title: 'Automated PR: Update readwise sync'
+          body: |
+            Automatic update to readwise file.
+          base: main
