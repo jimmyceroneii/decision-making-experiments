@@ -8,7 +8,7 @@ type RetrieveReadwiseArticlesReturnType = {
 
 export const retrieveReadwiseArticle =
   async (): Promise<RetrieveReadwiseArticlesReturnType> => {
-    const articles = await fetchDocumentListApi({ writeToFile: false })
+    const articles = await fetchDocumentListApi()
 
     console.log('items before filtering: ', articles.length)
 

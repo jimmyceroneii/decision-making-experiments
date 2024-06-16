@@ -1,4 +1,4 @@
-import { fetchDocumentListApi } from '../../sources/readwise-reader/fetch'
+import { fetchLocalArticles } from '../../sources/readwise-reader/fetch'
 import { isValidReadwiseArticle } from '../../sources/readwise-reader/filter'
 import { shuffleList } from '../../utils/randomizer'
 import { fetchSearch } from '../../utils/search'
@@ -12,7 +12,11 @@ type RetrieveReadwiseArticlesReturnType = {
 
 export const retrieveReadwiseArticle =
   async (): Promise<RetrieveReadwiseArticlesReturnType> => {
-    const articles = await fetchDocumentListApi({ writeToFile: false })
+    const articles = fetchLocalArticles()
+
+    if (!articles) {
+      throw new Error('no articles found in json backup')
+    }
 
     console.log('filtering to only valid articles')
 

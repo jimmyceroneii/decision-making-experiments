@@ -1,14 +1,8 @@
+import fs from 'fs'
 import { sendRequestWithRetry } from '../../utils/retry'
-import { writeArrayToFile } from '../../utils/writeFile'
 import { ReadwiseArticle } from './types'
 
-type FetchDocumentListApiParams = {
-  writeToFile: boolean
-}
-
-export const fetchDocumentListApi = async ({
-  writeToFile = false,
-}: FetchDocumentListApiParams) => {
+export const fetchDocumentListApi = async () => {
   let fullData: ReadwiseArticle[] = []
   let nextPageCursor = null
 
@@ -33,14 +27,24 @@ export const fetchDocumentListApi = async ({
 
   console.log('items before filtering: ', fullData.length)
 
-  if (writeToFile) {
-    console.log('writing to file')
-
-    writeArrayToFile<ReadwiseArticle>({
-      filePath: 'sources/readwise-reader/backup.json',
-      array: fullData,
-    })
-  }
-
   return fullData
+}
+
+export const fetchLocalArticles = (): ReadwiseArticle[] | undefined => {
+  let data: ReadwiseArticle[]
+
+  try {
+    const rawData = fs.readFileSync(
+      'sources/readwise-reader/backup.json',
+      'utf8',
+    )
+
+    data = JSON.parse(rawData)
+
+    return data
+  } catch (err) {
+    console.error(err)
+
+    return undefined
+  }
 }
