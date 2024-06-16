@@ -24,7 +24,7 @@ jobs:
         run: |
           DATE=$(date +"%Y%m%d")
           BRANCH_NAME="branch-${DATE}"
-          echo "::set-output name=branch::${BRANCH_NAME}"
+          echo "branch=${BRANCH_NAME}" >> $GITHUB_OUTPUT
 
       - name: Create new branch
         run: |
@@ -53,6 +53,7 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.PAT_GITHUB }}
+          branch: ${{ steps.determine-branch.outputs.branch }}
 
       - name: Create Pull Request
         id: create_pr
