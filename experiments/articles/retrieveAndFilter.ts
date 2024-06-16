@@ -12,7 +12,7 @@ type RetrieveReadwiseArticlesReturnType = {
 
 export const retrieveReadwiseArticle =
   async (): Promise<RetrieveReadwiseArticlesReturnType> => {
-    const articles = await fetchDocumentListApi()
+    const articles = await fetchDocumentListApi({ writeToFile: false })
 
     console.log('filtering to only valid articles')
 
