@@ -41,19 +41,14 @@ jobs:
       - name: run script
         run: npx ts-node sources/readwise-reader/sync.ts
 
-      - name: Commit changes
+      - name: Push changes
         run: |
           git config --global user.email "api-user@decision-making-experiments.com"
           git config --global user.name "Decision Making Bot"
           git status
           git add .
           git commit -m "Update Readwise JSON file via GitHub Actions"
-
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.PAT_GITHUB }}
-          branch: ${{ steps.determine-branch.outputs.branch }}
+          git push origin ${{ steps.determine-branch.outputs.branch }}
 
       - name: Create Pull Request
         id: create_pr
