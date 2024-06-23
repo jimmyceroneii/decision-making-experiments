@@ -1,5 +1,3 @@
-import { generateEmail } from './generate-email'
-import { generateReadwiseTestArticle } from './test/helpers'
 import * as dotenv from 'dotenv'
 dotenv.config()
 
