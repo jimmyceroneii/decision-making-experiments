@@ -1,11 +1,11 @@
-import { isWeeklyNewsletter } from '../../../sources/readwise-reader/filter'
-import { ReadwiseArticle, Tags } from '../../../sources/readwise-reader/types'
-import { generateReadwiseTestArticle } from './helpers'
-
-const DATE = '2024-04-04'
+import { isWeeklyNewsletter } from '../sources/readwise-reader/filter'
+import { ReadwiseArticle, Tags } from '../sources/readwise-reader/types'
+import { generateReadwiseTestArticle } from './helper'
 
 describe('filter', () => {
-  const validTags = { DATE: { name: DATE, type: 'manual', created: 10 } }
+  const validTags = {
+    newsletter: { name: 'newsletter', type: 'manual', created: 10 },
+  }
 
   it('filters out articles without the proper tags', () => {
     const articleList: ReadwiseArticle[] = []
@@ -44,7 +44,7 @@ describe('filter', () => {
       isWeeklyNewsletter(article),
     )
 
-    expect(filteredList.length).toEqual(20)
+    expect(filteredList.length).toEqual(10)
   })
 
   it('filters out articles without a url', () => {
