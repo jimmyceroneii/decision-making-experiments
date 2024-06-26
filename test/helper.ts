@@ -25,7 +25,7 @@ export const generateMatterTestArticle = (
     favorited: chance.bool(),
     read: chance.bool(),
     highlightCount: chance.integer({ min: 1, max: 10000 }),
-    lastInteractionDate: chance.string({ length: 10 }),
+    lastInteractionDate: chance.date().toString(),
     ...params,
   }
 }

@@ -8,11 +8,10 @@ type GenerateWeightParams<T> = {
 }
 
 type WeightedRandomizerParams<T> = {
-  list: T[]
-  weightFn: (item: T) => number
+  weightedList: Weighted<T>[]
 }
 
-const generateWeights = <T>({
+export const generateWeights = <T>({
   list,
   weightFn,
 }: GenerateWeightParams<T>): Weighted<T>[] => {
@@ -26,21 +25,29 @@ const generateWeights = <T>({
   return weightedList
 }
 
-export const weightedRandomizer = <T>({
-  list,
-  weightFn,
-}: WeightedRandomizerParams<T>): Weighted<T> | null => {
-  const weightedList = generateWeights({ list, weightFn })
+export const sortWeightedList = <T>({
+  weightedList,
+}: WeightedRandomizerParams<T>): Weighted<T>[] => {
+  const listSortedByWeight = weightedList.sort((a, b) => a.weight - b.weight)
 
-  const weightSum = weightedList.reduce((acc, item) => {
+  return listSortedByWeight
+}
+
+type RetrieveWeightItemsParams<T> = {
+  listSortedByWeight: Weighted<T>[]
+}
+
+// TODO: return a list of length n
+export const retrieveWeightedItems = <T>({
+  listSortedByWeight,
+}: RetrieveWeightItemsParams<T>): Weighted<T> | null => {
+  const weightSum = listSortedByWeight.reduce((acc, item) => {
     return acc + item.weight
   }, 0)
 
-  const randomNumber = Math.random() * weightSum
-
-  const listSortedByWeight = weightedList.sort((a, b) => a.weight - b.weight)
-
   let currentCount = 0
+
+  const randomNumber = Math.random() * weightSum
 
   for (const item of listSortedByWeight) {
     if (currentCount + randomNumber < item.weight) {
