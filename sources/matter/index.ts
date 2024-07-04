@@ -9,16 +9,14 @@ type RetrieveMatterArticlesReturnType = {
   similarMatterArticles: string[]
 }
 
-export const retrieveWeightedMatterArticles =
-  async (): Promise<RetrieveMatterArticlesReturnType> => {
-    const { articles: matterArticles, errors } =
-      await retrieveArticlesAndFormat()
+export const retrieveWeightedMatterArticles = async (): Promise<void> => {
+  const { articles: matterArticles, errors } = await retrieveArticlesAndFormat()
 
-    console.log('matter articles: ', matterArticles.length)
-    console.log('matter errors: ', errors.length)
+  console.log('matter articles: ', matterArticles.length)
+  console.log('matter errors: ', errors.length)
 
-    const weightedRandomArticle = null
-  }
+  const weightedRandomArticle = null
+}
 
 export const retrieveMatterArticles =
   async (): Promise<RetrieveMatterArticlesReturnType> => {
