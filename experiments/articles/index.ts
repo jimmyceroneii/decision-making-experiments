@@ -1,6 +1,6 @@
 import { generateEmail } from './generate-email'
 import { sendEmail } from '../../utils/send'
-import { retrieveMatterArticles } from '../../sources/matter'
+import { retrieveWeightedMatterArticles } from '../../sources/matter'
 import { retrieveReadwiseArticle } from './retrieveAndFilter'
 
 const main = async () => {
@@ -8,7 +8,7 @@ const main = async () => {
     const { readwiseArticleTitle, readwiseArticleUrl, relatedArticles } =
       await retrieveReadwiseArticle()
     const { matterArticleTitle, matterArticleUrl, similarMatterArticles } =
-      await retrieveMatterArticles()
+      await retrieveWeightedMatterArticles()
 
     const emailHtml = generateEmail({
       readwiseArticleUrl,

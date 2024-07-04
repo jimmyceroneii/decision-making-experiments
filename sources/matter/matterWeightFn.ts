@@ -5,10 +5,13 @@ type ArticleWeightFnParams = {
   date: Date
 }
 
-export const articleWeightFn = ({ article, date }: ArticleWeightFnParams) => {
+export const matterArticleWeightFn = ({
+  article,
+  date,
+}: ArticleWeightFnParams): number => {
   const comparisonDate = date.getTime()
 
   const articleDate = new Date(article.lastInteractionDate).getTime()
 
-  return comparisonDate - articleDate
+  return (comparisonDate - articleDate) / (1000 * 60 * 60 * 24)
 }

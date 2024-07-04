@@ -1,7 +1,7 @@
 import { MatterArticle } from '../sources/matter/types'
 import {
   generateWeights,
-  retrieveWeightedItems,
+  retrieveWeightedItem,
   sortWeightedList,
 } from '../utils/weightedRandomizer'
 import { generateMatterTestArticle } from './helper'
@@ -48,13 +48,13 @@ describe('utils/weightedRandomizer', () => {
     })
   })
 
-  describe('retrieveWeightedItems', () => {
-    it.only('returns a single item', () => {
+  describe('retrieveWeightedItem', () => {
+    it('returns a single item', () => {
       const weightedList = generateWeights({ list: example, weightFn })
 
       const sortedList = sortWeightedList<MatterArticle>({ weightedList })
 
-      const item = retrieveWeightedItems({
+      const item = retrieveWeightedItem({
         listSortedByWeight: sortedList,
       })
 

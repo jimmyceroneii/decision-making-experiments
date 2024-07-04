@@ -1,4 +1,4 @@
-type Weighted<T> = T & {
+export type Weighted<T> = T & {
   weight: number
 }
 
@@ -37,7 +37,7 @@ type RetrieveWeightItemsParams<T> = {
   listSortedByWeight: Weighted<T>[]
 }
 
-export const retrieveWeightedItems = <T>({
+export const retrieveWeightedItem = <T>({
   listSortedByWeight,
 }: RetrieveWeightItemsParams<T>): Weighted<T> | null => {
   const weightSum = listSortedByWeight.reduce((acc, item) => {
@@ -49,7 +49,7 @@ export const retrieveWeightedItems = <T>({
   const randomNumber = Math.random() * weightSum
 
   for (const item of listSortedByWeight) {
-    if (currentCount + randomNumber < item.weight) {
+    if (item.weight + currentCount > randomNumber) {
       return item
     } else {
       currentCount += item.weight
