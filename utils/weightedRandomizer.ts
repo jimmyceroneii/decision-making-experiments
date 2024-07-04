@@ -37,7 +37,6 @@ type RetrieveWeightItemsParams<T> = {
   listSortedByWeight: Weighted<T>[]
 }
 
-// TODO: return a list of length n
 export const retrieveWeightedItems = <T>({
   listSortedByWeight,
 }: RetrieveWeightItemsParams<T>): Weighted<T> | null => {

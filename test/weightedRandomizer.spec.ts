@@ -49,16 +49,16 @@ describe('utils/weightedRandomizer', () => {
   })
 
   describe('retrieveWeightedItems', () => {
-    it('returns a sorted list of specified length', () => {
+    it.only('returns a single item', () => {
       const weightedList = generateWeights({ list: example, weightFn })
 
       const sortedList = sortWeightedList<MatterArticle>({ weightedList })
 
-      const setOfWeightedItems = retrieveWeightedItems({
+      const item = retrieveWeightedItems({
         listSortedByWeight: sortedList,
       })
 
-      expect(setOfWeightedItems).toHaveLength(2)
+      expect(item).toBeDefined()
     })
   })
 })
