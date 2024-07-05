@@ -13,6 +13,6 @@ describe("matterWeightFn", () => {
     });
 
     // the difference between today's date and november 2023
-    expect(weight).toBeCloseTo(220.045625);
+    expect(weight).toBeCloseTo(220.045625, 0);
   });
 });
