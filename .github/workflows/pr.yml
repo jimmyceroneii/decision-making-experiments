@@ -1,0 +1,23 @@
+name: PR Checks
+
+on:
+  pull_request:
+
+jobs:
+  checks:
+    runs-on: ubunutu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: install
+        run: yarn
+
+      - name: compile
+        run: yarn compile
+
+      - name: test
+        run: yarn test
+
+      - name: lint
+        run: yarn lint
