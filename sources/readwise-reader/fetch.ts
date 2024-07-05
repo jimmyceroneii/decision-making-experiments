@@ -1,50 +1,50 @@
-import fs from 'fs'
-import { sendRequestWithRetry } from '../../utils/retry'
-import { ReadwiseArticle } from './types'
+import fs from "fs";
+import { sendRequestWithRetry } from "../../utils/retry";
+import type { ReadwiseArticle } from "./types";
 
 export const fetchDocumentListApi = async () => {
-  let fullData: ReadwiseArticle[] = []
-  let nextPageCursor = null
+	const fullData: ReadwiseArticle[] = [];
+	let nextPageCursor = null;
 
-  while (true) {
-    const queryParams = new URLSearchParams()
-    if (nextPageCursor) {
-      queryParams.append('pageCursor', nextPageCursor)
-    }
-    console.log(
-      'Making export api request with params ' + queryParams.toString(),
-    )
-    const response = await sendRequestWithRetry<{
-      results: ReadwiseArticle[]
-      nextPageCursor: string
-    }>('https://readwise.io/api/v3/list/?' + queryParams.toString())
-    fullData.push(...response['results'])
-    nextPageCursor = response['nextPageCursor']
-    if (!nextPageCursor) {
-      break
-    }
-  }
+	while (true) {
+		const queryParams = new URLSearchParams();
+		if (nextPageCursor) {
+			queryParams.append("pageCursor", nextPageCursor);
+		}
+		console.log(
+			"Making export api request with params " + queryParams.toString(),
+		);
+		const response = await sendRequestWithRetry<{
+			results: ReadwiseArticle[];
+			nextPageCursor: string;
+		}>("https://readwise.io/api/v3/list/?" + queryParams.toString());
+		fullData.push(...response["results"]);
+		nextPageCursor = response["nextPageCursor"];
+		if (!nextPageCursor) {
+			break;
+		}
+	}
 
-  console.log('items before filtering: ', fullData.length)
+	console.log("items before filtering: ", fullData.length);
 
-  return fullData
-}
+	return fullData;
+};
 
 export const fetchLocalArticles = (): ReadwiseArticle[] | undefined => {
-  let data: ReadwiseArticle[]
+	let data: ReadwiseArticle[];
 
-  try {
-    const rawData = fs.readFileSync(
-      'sources/readwise-reader/backup.json',
-      'utf8',
-    )
+	try {
+		const rawData = fs.readFileSync(
+			"sources/readwise-reader/backup.json",
+			"utf8",
+		);
 
-    data = JSON.parse(rawData)
+		data = JSON.parse(rawData);
 
-    return data
-  } catch (err) {
-    console.error(err)
+		return data;
+	} catch (err) {
+		console.error(err);
 
-    return undefined
-  }
-}
+		return undefined;
+	}
+};
