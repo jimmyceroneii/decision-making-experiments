@@ -17,11 +17,11 @@ export type Book = {
 	originalPublicationYear: number;
 	dateRead: string;
 	dateAdded: string;
-	bookShelves: any;
-	bookShelvesWithPositions: any;
-	exclusiveShelf: any;
+	bookShelves: string;
+	bookShelvesWithPositions: string;
+	exclusiveShelf: string;
 	myReview: string;
-	spoiler: any;
+	spoiler: string;
 	privateNotes: string;
 	readCount: number;
 	ownedCopies: number;
