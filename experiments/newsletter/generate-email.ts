@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "node:fs";
 import ejs from "ejs";
 import type { ReadwiseArticle } from "../../sources/readwise-reader/types";
 
