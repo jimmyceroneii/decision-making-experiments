@@ -18,6 +18,7 @@ const convertCsvToTypedArray = async (
 
 		fs.createReadStream(filename)
 			.pipe(parse({ delimiter: "," }))
+			// biome-ignore lint: comes from a csv, no type yet
 			.on("data", (row: any) => {
 				if (isFirstRow) {
 					isFirstRow = false;

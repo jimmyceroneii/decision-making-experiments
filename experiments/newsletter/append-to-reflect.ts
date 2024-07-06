@@ -5,7 +5,7 @@ const REFLECT_ACCESS_TOKEN = process.env.REFLECT_ACCESS_TOKEN;
 
 export const appendToReflect = async (text: string) => {
 	try {
-		const today = new Date().toLocaleDateString() + " Newsletter";
+		const today = `${new Date().toLocaleDateString()} Newsletter`;
 
 		await fetch("https://reflect.app/api/graphs/jimmyceroneii/notes", {
 			method: "POST",

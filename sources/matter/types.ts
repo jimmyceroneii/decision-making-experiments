@@ -21,7 +21,7 @@ export type MatterArticle = {
 	author: string | null;
 	publisher: string | null;
 	url: string;
-	tags: any;
+	tags: string;
 	wordCount: number;
 	inQueue: boolean;
 	favorited: boolean;
