@@ -12,14 +12,14 @@ export const fetchDocumentListApi = async () => {
 			queryParams.append("pageCursor", nextPageCursor);
 		}
 		console.log(
-			"Making export api request with params " + queryParams.toString(),
+			`Making export api request with params ${queryParams.toString()}`,
 		);
 		const response = await sendRequestWithRetry<{
 			results: ReadwiseArticle[];
 			nextPageCursor: string;
-		}>("https://readwise.io/api/v3/list/?" + queryParams.toString());
-		fullData.push(...response["results"]);
-		nextPageCursor = response["nextPageCursor"];
+		}>(`https://readwise.io/api/v3/list/?${queryParams.toString()}`);
+		fullData.push(...response.results);
+		nextPageCursor = response?.nextPageCursor;
 		if (!nextPageCursor) {
 			break;
 		}
