@@ -18,7 +18,7 @@ const main = async () => {
 
 	const randomBook = randomBookList[0];
 
-	const randomBookFormattedTitle = randomBook["title"].split(" ").join("+");
+	const randomBookFormattedTitle = randomBook.title.split(" ").join("+");
 
 	const alibrisSearchUrl = `https://www.alibris.com/booksearch?keyword=${randomBookFormattedTitle}`;
 
