@@ -1,1 +1,3 @@
-npm test
+yarn compile
+yarn lint
+yarn test
