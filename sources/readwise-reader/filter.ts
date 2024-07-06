@@ -39,9 +39,9 @@ export const isValidReadwiseArticle = (article: ReadwiseArticle): boolean => {
 
 const isValidCategory = (category: keyof typeof CATEGORIES) => {
 	return (
-		category == CATEGORIES.article ||
-		category == CATEGORIES.email ||
-		category == CATEGORIES.pdf ||
-		category == CATEGORIES.rss
+		category === CATEGORIES.article ||
+		category === CATEGORIES.email ||
+		category === CATEGORIES.pdf ||
+		category === CATEGORIES.rss
 	);
 };
