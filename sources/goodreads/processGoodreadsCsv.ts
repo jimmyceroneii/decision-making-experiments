@@ -1,5 +1,5 @@
-import * as fs from "fs";
-import * as path from "path";
+import * as fs from "node:fs";
+import * as path from "node:path";
 import { parse } from "csv-parse";
 import type { ValidationError } from "joi";
 import { type Book, bookSchema } from "./types";
@@ -18,6 +18,7 @@ const convertCsvToTypedArray = async (
 
 		fs.createReadStream(filename)
 			.pipe(parse({ delimiter: "," }))
+			// biome-ignore lint: comes from a csv, no type yet
 			.on("data", (row: any) => {
 				if (isFirstRow) {
 					isFirstRow = false;

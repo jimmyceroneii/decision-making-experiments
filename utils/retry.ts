@@ -19,7 +19,7 @@ export const sendRequestWithRetry = async <T>(
 		});
 		const data = await response.json();
 
-		if ("detail" in data && data["detail"].includes("throttled")) {
+		if ("detail" in data && data.detail.includes("throttled")) {
 			throw new Error(`throttled on retry #${retries}...`);
 		}
 
@@ -29,8 +29,8 @@ export const sendRequestWithRetry = async <T>(
 		if (retries < MAX_RETRIES) {
 			await new Promise((resolve) => setTimeout(resolve, INITIAL_BACKOFF));
 			return sendRequestWithRetry(url, retries + 1);
-		} else {
-			throw new Error(`Max retries reached (${MAX_RETRIES})`);
 		}
+
+		throw new Error(`Max retries reached (${MAX_RETRIES})`);
 	}
 };

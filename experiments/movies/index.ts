@@ -1,4 +1,4 @@
-import * as fs from "fs";
+import * as fs from "node:fs";
 import { shuffleList } from "../../utils/randomizer";
 
 const main = async () => {

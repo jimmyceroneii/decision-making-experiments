@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "node:fs";
 import ejs from "ejs";
 
 export const generateEmail = (

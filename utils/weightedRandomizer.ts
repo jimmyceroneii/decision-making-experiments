@@ -51,9 +51,9 @@ export const retrieveWeightedItem = <T>({
 	for (const item of listSortedByWeight) {
 		if (item.weight + currentCount > randomNumber) {
 			return item;
-		} else {
-			currentCount += item.weight;
 		}
+
+		currentCount += item.weight;
 	}
 
 	return null;

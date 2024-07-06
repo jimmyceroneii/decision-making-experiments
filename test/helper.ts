@@ -57,7 +57,7 @@ export const generateReadwiseTestArticle = (
 		content: "test",
 		source_url: chance.string({ length: 10 }),
 		notes: chance.string({ length: 10 }),
-		parent_id: chance.integer({ min: 1, max: 10000 }),
+		parent_id: chance.string({ length: 10 }),
 		reading_progress: 0,
 		...params,
 	};
