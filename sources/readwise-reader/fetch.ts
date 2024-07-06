@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "node:fs";
 import { sendRequestWithRetry } from "../../utils/retry";
 import type { ReadwiseArticle } from "./types";
 
