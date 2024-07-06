@@ -1,10 +1,11 @@
-import * as fs from "fs";
-import * as path from "path";
+import * as fs from "node:fs";
+import * as path from "node:path";
 import { parse } from "csv-parse";
 import type { ValidationError } from "joi";
 import { type MatterArticle, matterArticleSchema } from "./types";
 
 export const convertToBoolean = (field: string): boolean => {
+	// biome-ignore lint: fixes csv to type problem
 	return field.toLowerCase() === "true" ? true : false;
 };
 
@@ -30,6 +31,7 @@ const convertCsvToTypedArray = async (
 
 		fs.createReadStream(filename)
 			.pipe(parse({ delimiter: "," }))
+			// biome-ignore lint: no type, coming from csv
 			.on("data", (row: any) => {
 				if (isFirstRow) {
 					isFirstRow = false;

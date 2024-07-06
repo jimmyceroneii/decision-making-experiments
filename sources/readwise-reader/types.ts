@@ -42,6 +42,7 @@ export type Tag = {
 	created: number;
 };
 
+// biome-ignore lint: type magic from weird readwise type
 export type Tags = Record<string, Tag> | {};
 
 export type ReadwiseArticle = {
@@ -58,11 +59,11 @@ export type ReadwiseArticle = {
 	created_at: string;
 	updated_at: string;
 	published_date: number;
-	summary: any;
+	summary: string | null;
 	image_url: string;
-	content: any;
+	content: string | null;
 	source_url: string;
 	notes: string;
-	parent_id: any;
+	parent_id: string | null;
 	reading_progress: number;
 };
