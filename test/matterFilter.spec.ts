@@ -7,6 +7,7 @@ describe("filter", () => {
 		const articleList: MatterArticle[] = [];
 
 		for (let i = 0; i < 20; i++) {
+			// biome-ignore lint: generates test data
 			const read = i % 2 === 0 ? true : false;
 
 			articleList.push(
@@ -25,6 +26,7 @@ describe("filter", () => {
 		const articleList: MatterArticle[] = [];
 
 		for (let i = 0; i < 20; i++) {
+			// biome-ignore lint: generates test data
 			const inQueue = i % 2 === 0 ? true : false;
 
 			articleList.push(
