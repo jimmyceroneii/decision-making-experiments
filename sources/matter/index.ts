@@ -77,32 +77,38 @@ export const retrieveWeightedMatterArticles =
 		};
 	};
 
+export const retrieveRandomMatterArticle = async (): Promise<MatterArticle> => {
+	const { articles: matterArticles, errors } =
+		await retrieveArticlesAndFormat();
+
+	console.log("matter articles: ", matterArticles.length);
+	console.log("matter errors: ", errors.length);
+
+	const shuffledMatterArticles = shuffleList(matterArticles);
+
+	console.log("filtering matter articles");
+
+	const filteredMatterArticles = shuffledMatterArticles.filter((article) =>
+		isValidMatterArticle(article),
+	);
+
+	console.log(
+		"matter articles left after filter: ",
+		filteredMatterArticles.length,
+	);
+
+	const randomMatterArticle = filteredMatterArticles[0];
+
+	console.log(randomMatterArticle);
+
+	console.log("Found random matter article: ", randomMatterArticle.title);
+
+	return randomMatterArticle;
+};
+
 export const retrieveMatterArticles =
 	async (): Promise<RetrieveMatterArticlesReturnType> => {
-		const { articles: matterArticles, errors } =
-			await retrieveArticlesAndFormat();
-
-		console.log("matter articles: ", matterArticles.length);
-		console.log("matter errors: ", errors.length);
-
-		const shuffledMatterArticles = shuffleList(matterArticles);
-
-		console.log("filtering matter articles");
-
-		const filteredMatterArticles = shuffledMatterArticles.filter((article) =>
-			isValidMatterArticle(article),
-		);
-
-		console.log(
-			"matter articles left after filter: ",
-			filteredMatterArticles.length,
-		);
-
-		const randomMatterArticle = filteredMatterArticles[0];
-
-		console.log(randomMatterArticle);
-
-		console.log("Found random matter article: ", randomMatterArticle.title);
+		const randomMatterArticle = await retrieveRandomMatterArticle();
 
 		console.log("Finding similar matter articles...");
 
