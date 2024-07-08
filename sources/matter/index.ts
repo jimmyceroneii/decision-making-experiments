@@ -1,3 +1,4 @@
+import { logger } from "../../utils/logger";
 import { shuffleList } from "../../utils/randomizer";
 import { fetchSimilar } from "../../utils/search";
 import {
@@ -6,9 +7,13 @@ import {
 	retrieveWeightedItem,
 	sortWeightedList,
 } from "../../utils/weightedRandomizer";
+import { writeArrayToFile } from "../../utils/writeFile";
 import { isValidMatterArticle } from "./filter";
 import { matterArticleWeightFn } from "./matterWeightFn";
-import { retrieveArticlesAndFormat } from "./processMatterCsv";
+import {
+	fetchLocalArticles,
+	retrieveArticlesAndFormat,
+} from "./processMatterCsv";
 import type { MatterArticle } from "./types";
 
 type RetrieveMatterArticlesReturnType = {
@@ -27,34 +32,33 @@ export const retrieveWeightedMatterArticles =
 		const weightFn = (item: MatterArticle) =>
 			matterArticleWeightFn({ article: item, date });
 
-		console.log("matter articles: ", matterArticles.length);
-		console.log("matter errors: ", errors.length);
+		logger(`matter articles: ${matterArticles.length}`);
+		logger(`matter errors: ${errors.length}`);
 
-		console.log("filtering matter articles");
+		logger("filtering matter articles");
 
 		const filteredMatterArticles = matterArticles.filter((article) =>
 			isValidMatterArticle(article),
 		);
 
-		console.log(
-			"matter articles left after filter: ",
-			filteredMatterArticles.length,
+		logger(
+			`matter articles left after filter: ${filteredMatterArticles.length}`,
 		);
 
-		console.log("generating weights...");
+		logger("generating weights...");
 
 		const weightedRandomArticles = generateWeights<MatterArticle>({
 			list: filteredMatterArticles,
 			weightFn,
 		});
 
-		console.log("sorting weighted articles...");
+		logger("sorting weighted articles...");
 
 		const sortedRandomArticles = sortWeightedList({
 			weightedList: weightedRandomArticles,
 		});
 
-		console.log("selecting random article...");
+		logger("selecting random article...");
 
 		const article = retrieveWeightedItem({
 			listSortedByWeight: sortedRandomArticles,
@@ -64,9 +68,9 @@ export const retrieveWeightedMatterArticles =
 			throw new Error("randomness failed, no article found!");
 		}
 
-		console.log("Found random matter article: ", article.title);
+		logger(`Found random matter article: ${article.title}`);
 
-		console.log("Finding similar matter articles...");
+		logger("Finding similar matter articles...");
 
 		const similarMatterArticles = await fetchSimilar(article.url);
 
@@ -78,30 +82,29 @@ export const retrieveWeightedMatterArticles =
 	};
 
 export const retrieveRandomMatterArticle = async (): Promise<MatterArticle> => {
-	const { articles: matterArticles, errors } =
-		await retrieveArticlesAndFormat();
+	const matterArticles = fetchLocalArticles();
 
-	console.log("matter articles: ", matterArticles.length);
-	console.log("matter errors: ", errors.length);
+	if (!matterArticles) {
+		throw new Error("problem with local read of file");
+	}
+
+	logger(`matter articles: ${matterArticles.length}`);
 
 	const shuffledMatterArticles = shuffleList(matterArticles);
 
-	console.log("filtering matter articles");
+	logger("filtering matter articles");
 
 	const filteredMatterArticles = shuffledMatterArticles.filter((article) =>
 		isValidMatterArticle(article),
 	);
 
-	console.log(
-		"matter articles left after filter: ",
-		filteredMatterArticles.length,
-	);
+	logger(`matter articles left after filter: ${filteredMatterArticles.length}`);
 
 	const randomMatterArticle = filteredMatterArticles[0];
 
-	console.log(randomMatterArticle);
+	logger(JSON.stringify(randomMatterArticle));
 
-	console.log("Found random matter article: ", randomMatterArticle.title);
+	logger(`Found random matter article: ${randomMatterArticle.title}`);
 
 	return randomMatterArticle;
 };
@@ -110,7 +113,7 @@ export const retrieveMatterArticles =
 	async (): Promise<RetrieveMatterArticlesReturnType> => {
 		const randomMatterArticle = await retrieveRandomMatterArticle();
 
-		console.log("Finding similar matter articles...");
+		logger("Finding similar matter articles...");
 
 		const similarMatterArticles = await fetchSimilar(randomMatterArticle.url);
 

@@ -5,7 +5,7 @@ type SelectedElements = Record<string, number>;
 const randomizationTest = async () => {
 	const selected: SelectedElements = {};
 
-	for (let i = 0; i < 3; i++) {
+	for (let i = 0; i < 100; i++) {
 		const matterArticle = await retrieveRandomMatterArticle();
 
 		const matterArticleTitle = matterArticle.title || matterArticle.url;

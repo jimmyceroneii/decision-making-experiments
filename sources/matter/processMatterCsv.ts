@@ -3,6 +3,7 @@ import * as path from "node:path";
 import { parse } from "csv-parse";
 import type { ValidationError } from "joi";
 import { type MatterArticle, matterArticleSchema } from "./types";
+import { logger } from "../../utils/logger";
 
 export const convertToBoolean = (field: string): boolean => {
 	// biome-ignore lint: fixes csv to type problem
@@ -72,8 +73,8 @@ const convertCsvToTypedArray = async (
 
 				if (validationResult.error) {
 					if (i < 10) {
-						console.log(validationResult.error.details);
-						console.log(row);
+						logger(JSON.stringify(validationResult.error.details));
+						logger(JSON.stringify(row));
 					}
 
 					errorsArray.push(validationResult.error);
@@ -98,4 +99,20 @@ export const retrieveArticlesAndFormat = async () => {
 	const filePath = path.join(absolutePath, "_matter_history.csv");
 
 	return await convertCsvToTypedArray(filePath);
+};
+
+export const fetchLocalArticles = (): MatterArticle[] | undefined => {
+	let data: MatterArticle[];
+
+	try {
+		const rawData = fs.readFileSync("sources/matter/backup.json", "utf8");
+
+		data = JSON.parse(rawData);
+
+		return data;
+	} catch (err) {
+		console.error(err);
+
+		return undefined;
+	}
 };
