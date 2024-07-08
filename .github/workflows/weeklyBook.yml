@@ -1,22 +1,24 @@
 name: Weekly Book
 
-on: 
-    schedule: 
+on:
+    schedule:
         - cron: '0 20 * * 0'
-    workflow_dispatch: 
+    workflow_dispatch:
 
 jobs:
     send-weekly-book:
         runs-on: ubuntu-latest
-        environment: 
+        environment:
           name: production
-        
-        env: 
+
+        env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-        
+
         steps:
           - name: Checkout code
-            uses: actions/checkout@v2
+            uses: actions/checkout@v4
+
+          - uses: oven-sh/setup-bun@v2
 
           - name: Setup node.js
             uses: actions/setup-node@v4
@@ -25,5 +27,4 @@ jobs:
             run: yarn
 
           - name: Run script
-            run: npx ts-node experiments/books/index.ts
-          
+            run: bun experiments/books/index.ts

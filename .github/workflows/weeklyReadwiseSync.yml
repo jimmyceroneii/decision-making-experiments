@@ -19,6 +19,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - uses: oven-sh/setup-bun@v2
+
       - name: Determine branch name based on date
         id: determine-branch
         run: |
@@ -39,7 +41,7 @@ jobs:
         run: yarn
 
       - name: run script
-        run: npx ts-node sources/readwise-reader/sync.ts
+        run: bun sources/readwise-reader/sync.ts
 
       - name: Push changes
         run: |

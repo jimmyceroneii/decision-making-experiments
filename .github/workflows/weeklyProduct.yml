@@ -4,28 +4,30 @@ on:
     schedule:
       - cron: '0 0 * * 5' # Runs the job every Friday
     workflow_dispatch: # allow for manual trigger
-  
+
 jobs:
     send-weekly-product:
         runs-on: ubuntu-latest
         environment:
             name: Production
-        
+
         env:
             EXA_API_KEY: ${{ secrets.EXA_API_KEY }}
             RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-        
+
         steps:
             - name: Checkout code
-              uses: actions/checkout@v2
+              uses: actions/checkout@v4
+
+            - uses: oven-sh/setup-bun@v2
 
             - name: Setup Node.js
               uses: actions/setup-node@v4
               with:
                 node-version: '18'
-            
+
             - name: Install dependencies
               run: yarn
 
             - name: Run script
-              run: npx ts-node experiments/products/index.ts
+              run: bun experiments/products/index.ts

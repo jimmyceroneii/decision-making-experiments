@@ -4,29 +4,31 @@ on:
     schedule:
       - cron: '0 21 1,8,15,22 * *' # Runs the job on the 1st, 8th, 15th, and 22nd
     workflow_dispatch: # allow for manual trigger
-  
+
 jobs:
     send-weekly-newsletter:
         runs-on: ubuntu-latest
         environment:
             name: Production
-        
+
         env:
             EXA_API_KEY: ${{ secrets.EXA_API_KEY }}
             RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
             READWISE_API_TOKEN: ${{ secrets.READWISE_API_TOKEN }}
-        
+
         steps:
             - name: Checkout code
               uses: actions/checkout@v2
+
+            - uses: oven-sh/setup-bun@v2
 
             - name: Setup Node.js
               uses: actions/setup-node@v4
               with:
                 node-version: '18'
-            
+
             - name: Install dependencies
               run: yarn
 
             - name: Run script
-              run: npx ts-node experiments/newsletter/index.ts
+              run: bun experiments/newsletter/index.ts

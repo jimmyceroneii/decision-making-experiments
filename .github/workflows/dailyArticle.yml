@@ -18,7 +18,9 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -27,6 +29,6 @@ jobs:
 
       - name: Install dependencies
         run: yarn
-  
+
       - name: Run script
-        run: npx ts-node experiments/articles/index.ts
+        run: bun experiments/articles/index.ts
