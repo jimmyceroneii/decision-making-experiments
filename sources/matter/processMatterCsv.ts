@@ -2,8 +2,8 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 import { parse } from "csv-parse";
 import type { ValidationError } from "joi";
-import { type MatterArticle, matterArticleSchema } from "./types";
 import { logger } from "../../utils/logger";
+import { type MatterArticle, matterArticleSchema } from "./types";
 
 export const convertToBoolean = (field: string): boolean => {
 	// biome-ignore lint: fixes csv to type problem
