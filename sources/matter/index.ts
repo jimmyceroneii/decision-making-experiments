@@ -81,13 +81,9 @@ export const retrieveWeightedMatterArticles =
 		};
 	};
 
-export const retrieveRandomMatterArticle = async (): Promise<MatterArticle> => {
-	const matterArticles = fetchLocalArticles();
-
-	if (!matterArticles) {
-		throw new Error("problem with local read of file");
-	}
-
+export const retrieveRandomMatterArticle = async (
+	matterArticles: MatterArticle[],
+): Promise<MatterArticle> => {
 	logger(`matter articles: ${matterArticles.length}`);
 
 	const shuffledMatterArticles = shuffleList(matterArticles);
@@ -111,7 +107,14 @@ export const retrieveRandomMatterArticle = async (): Promise<MatterArticle> => {
 
 export const retrieveMatterArticles =
 	async (): Promise<RetrieveMatterArticlesReturnType> => {
-		const randomMatterArticle = await retrieveRandomMatterArticle();
+		const matterArticles = fetchLocalArticles();
+
+		if (!matterArticles) {
+			throw new Error("no local articles found");
+		}
+
+		const randomMatterArticle =
+			await retrieveRandomMatterArticle(matterArticles);
 
 		logger("Finding similar matter articles...");
 

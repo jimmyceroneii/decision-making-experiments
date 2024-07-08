@@ -1,19 +1,26 @@
 import { retrieveRandomMatterArticle } from "../sources/matter";
+import { fetchLocalArticles } from "../sources/matter/processMatterCsv";
 
 type SelectedElements = Record<string, number>;
+
+const matterArticles = fetchLocalArticles();
+
+if (!matterArticles) {
+	throw new Error("no local articles found");
+}
 
 const randomizationTest = async () => {
 	const selected: SelectedElements = {};
 
-	for (let i = 0; i < 100; i++) {
-		const matterArticle = await retrieveRandomMatterArticle();
+	for (let i = 0; i < 10000; i++) {
+		const matterArticle = await retrieveRandomMatterArticle(matterArticles);
 
-		const matterArticleTitle = matterArticle.title || matterArticle.url;
+		const matterArticleUrl = matterArticle.url;
 
-		if (matterArticleTitle in selected) {
-			selected[matterArticleTitle] += 1;
+		if (matterArticleUrl in selected) {
+			selected[matterArticleUrl] += 1;
 		} else {
-			selected[matterArticleTitle] = 1;
+			selected[matterArticleUrl] = 1;
 		}
 	}
 
