@@ -1,12 +1,12 @@
 import { retrieveWeightedMatterArticles } from "../../sources/matter/index";
+import { retrieveWeightedReadwiseArticles } from "../../sources/readwise-reader/retrieveAndFilter";
 import { sendEmail } from "../../utils/send";
 import { generateEmail } from "./generate-email";
-import { retrieveReadwiseArticle } from "./retrieveAndFilter";
 
 const main = async () => {
 	try {
 		const { readwiseArticleTitle, readwiseArticleUrl, relatedArticles } =
-			await retrieveReadwiseArticle();
+			await retrieveWeightedReadwiseArticles();
 		const { matterArticleTitle, matterArticleUrl, similarMatterArticles } =
 			await retrieveWeightedMatterArticles();
 
