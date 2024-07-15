@@ -2,7 +2,7 @@ name: Weekly Newsletter
 
 on:
     schedule:
-      - cron: '0 11 * * 6' # Runs the job every Saturday at 21:00 (9 PM)
+      - cron: '0 11 * * 6' # Runs the job every Saturday at 6:00 AM EST
     workflow_dispatch: # allow for manual trigger
 
 jobs:
