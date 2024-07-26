@@ -6,7 +6,7 @@
 	"license": "MIT",
 	"scripts": {
 		"compile": "npx tsc --noEmit",
-		"test": "npx jest",
+		"test": "bun test",
 		"lint": "npx biome check",
 		"prepare": "husky"
 	},
