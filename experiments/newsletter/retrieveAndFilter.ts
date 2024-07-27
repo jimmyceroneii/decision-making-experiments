@@ -1,4 +1,4 @@
-import { fetchDocumentListApi } from "../../sources/readwise-reader/fetch";
+import { fetchLocalArticles } from "../../sources/readwise-reader/fetch";
 import { isWeeklyNewsletter } from "../../sources/readwise-reader/filter";
 import type { ReadwiseArticle } from "../../sources/readwise-reader/types";
 
@@ -8,7 +8,11 @@ type RetrieveReadwiseArticlesReturnType = {
 
 export const retrieveReadwiseArticle =
 	async (): Promise<RetrieveReadwiseArticlesReturnType> => {
-		const articles = await fetchDocumentListApi();
+		const articles = fetchLocalArticles();
+
+		if (!articles) {
+			throw new Error("no articles found in sync");
+		}
 
 		console.log("items before filtering: ", articles.length);
 
