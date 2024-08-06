@@ -1,7 +1,6 @@
 import { CohereClient } from "cohere-ai";
+import type { EmbedResponse } from "cohere-ai/api";
 import * as dotenv from "dotenv";
-
-import { fetchLocalArticles } from "../../sources/matter/processMatterCsv";
 
 dotenv.config();
 
@@ -11,19 +10,14 @@ const cohere = new CohereClient({
 	token: COHERE_API_TOKEN,
 });
 
-const articles = fetchLocalArticles();
-
-if (!articles) {
-	throw new Error("no articles found in local cache");
-}
-
-const text = [articles[0].title];
-
-(async () => {
+export const generateEmbeddings = async (
+	inputs: string[],
+): Promise<EmbedResponse> => {
 	const embed = await cohere.embed({
-		texts: text,
+		texts: inputs,
 		model: "embed-english-v3.0",
 		inputType: "classification",
 	});
-	console.log(embed);
-})();
+
+	return embed;
+};
