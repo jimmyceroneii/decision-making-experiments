@@ -1,6 +1,6 @@
 import { isValidMatterArticle } from "../../sources/matter/filter";
 import { fetchLocalArticles } from "../../sources/matter/processMatterCsv";
-import { MatterArticle } from "../../sources/matter/types";
+import type { MatterArticle } from "../../sources/matter/types";
 import { logger } from "../../utils/logger";
 
 type SimpleSearchParams = {
