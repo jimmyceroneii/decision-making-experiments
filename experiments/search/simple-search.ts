@@ -5,7 +5,14 @@ import { logger } from "../../utils/logger";
 
 type SimpleSearchParams = {
 	searchTerm: string;
-	searchList: MatterArticle[];
+};
+
+const parseSearchTerm = (searchTerm: string) => {
+	const trimmedTerm = searchTerm.trim();
+	const splitTerm = trimmedTerm.split(" ");
+	const filteredSplitTerms = splitTerm.filter((term) => term.length > 3);
+
+	return filteredSplitTerms;
 };
 
 export const simpleSearch = (simpleSearchParams: SimpleSearchParams): void => {
@@ -22,4 +29,20 @@ export const simpleSearch = (simpleSearchParams: SimpleSearchParams): void => {
 	);
 
 	logger(`number of articles after filtering: ${filteredArticles.length}`);
+
+	const parsedSearchTerms = parseSearchTerm(simpleSearchParams.searchTerm);
+
+	console.log("parsedSearchTerms: ", parsedSearchTerms);
+
+	const foundItems: MatterArticle[] = [];
+
+	for (const term in parsedSearchTerms) {
+		foundItems.concat(
+			filteredArticles.filter((article) => article.title.includes(term)),
+		);
+	}
+
+	console.log("foundItems: ", foundItems.length);
 };
+
+const search = simpleSearch({ searchTerm: "ethical eating" });
