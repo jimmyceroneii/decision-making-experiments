@@ -50,6 +50,8 @@ export const simpleSearch = (simpleSearchParams: SimpleSearchParams): void => {
 	}
 
 	logger(`foundItems: ${foundItems.length}`);
+	
+  console.log(foundItems);
 };
 
 const search = simpleSearch({ searchTerm: "browser" });
