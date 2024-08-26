@@ -36,13 +36,20 @@ export const simpleSearch = (simpleSearchParams: SimpleSearchParams): void => {
 
 	const foundItems: MatterArticle[] = [];
 
-	for (const term in parsedSearchTerms) {
-		foundItems.concat(
-			filteredArticles.filter((article) => article.title.includes(term)),
-		);
+	for (const term of parsedSearchTerms) {
+		const matches = filteredArticles.filter((article) => {
+			return (
+				article.title.toLowerCase().includes(term) ||
+				article.url.toLowerCase().includes(term)
+			);
+		});
+
+		logger(`matches for ${term}: ${matches.length}`);
+
+		foundItems.push(...matches);
 	}
 
-	console.log("foundItems: ", foundItems.length);
+	logger(`foundItems: ${foundItems.length}`);
 };
 
-const search = simpleSearch({ searchTerm: "ethical eating" });
+const search = simpleSearch({ searchTerm: "browser" });
