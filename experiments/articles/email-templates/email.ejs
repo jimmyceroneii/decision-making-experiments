@@ -7,12 +7,24 @@
             <li><a href="<%= relatedArticle.url %>"><%= relatedArticle.title %></a></li>
          <% }); %>
       </ul>
+      <p>Similar Local Article</p>
+      <ul>
+         <% relatedLocalReadwiseArticles.forEach(function(relatedArticle) { %>
+            <li><a href="<%= relatedArticle.url %>"><%= relatedArticle.title %></a></li>
+         <% }); %>
+      </ul>
 
       <h1>Matter Article of the Day: <a href="<%= matterArticleUrl %>"><%= matterArticleTitle %></a></h1>
       <p>Similar Matter Articles</p>
       <ul>
          <% similarMatterArticles.forEach(function(similarMatterArticle) { %>
             <li><a href="<%= similarMatterArticle %>"><%= similarMatterArticle %></a></li>
+         <% }); %>
+      </ul>
+      <p>Similar Local Article</p>
+      <ul>
+         <% relatedLocalMatterArticles.forEach(function(relatedArticle) { %>
+            <li><a href="<%= relatedArticle.url %>"><%= relatedArticle.title %></a></li>
          <% }); %>
       </ul>
    </body>

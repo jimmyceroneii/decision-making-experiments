@@ -1,13 +1,13 @@
+import { simpleSearch } from "../../experiments/search/simple-search";
+import type { NarrowedArticle } from "../../experiments/search/types";
 import { logger } from "../../utils/logger";
 import { shuffleList } from "../../utils/randomizer";
 import { fetchSimilar } from "../../utils/search";
 import {
-	Weighted,
 	generateWeights,
 	retrieveWeightedItem,
 	sortWeightedList,
 } from "../../utils/weightedRandomizer";
-import { writeArrayToFile } from "../../utils/writeFile";
 import { isValidMatterArticle } from "./filter";
 import { matterArticleWeightFn } from "./matterWeightFn";
 import {
@@ -20,6 +20,7 @@ type RetrieveMatterArticlesReturnType = {
 	matterArticleUrl: string;
 	matterArticleTitle: string;
 	similarMatterArticles: string[];
+	relatedLocalMatterArticles: NarrowedArticle[];
 };
 
 export const retrieveWeightedMatterArticles =
@@ -70,14 +71,22 @@ export const retrieveWeightedMatterArticles =
 
 		logger(`Found random matter article: ${article.title}`);
 
-		logger("Finding similar matter articles...");
+		logger("Finding similar matter articles with EXA...");
 
 		const similarMatterArticles = await fetchSimilar(article.url);
+
+		logger("Finding similar matter articles locally...");
+
+		const relatedLocalMatterArticles = simpleSearch({
+			searchTerm: article.title,
+			list: filteredMatterArticles,
+		});
 
 		return {
 			matterArticleUrl: article.url,
 			matterArticleTitle: article.title || article.url,
 			similarMatterArticles,
+			relatedLocalMatterArticles,
 		};
 	};
 
@@ -120,9 +129,15 @@ export const retrieveMatterArticles =
 
 		const similarMatterArticles = await fetchSimilar(randomMatterArticle.url);
 
+		const relatedLocalMatterArticles = simpleSearch({
+			searchTerm: randomMatterArticle.title,
+			list: matterArticles,
+		});
+
 		return {
 			matterArticleUrl: randomMatterArticle.url,
 			matterArticleTitle: randomMatterArticle.title || randomMatterArticle.url,
 			similarMatterArticles,
+			relatedLocalMatterArticles,
 		};
 	};

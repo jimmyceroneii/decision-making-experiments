@@ -1,46 +1,42 @@
-import { isValidMatterArticle } from "../../sources/matter/filter";
-import { fetchLocalArticles } from "../../sources/matter/processMatterCsv";
-import type { MatterArticle } from "../../sources/matter/types";
 import { logger } from "../../utils/logger";
-
-type SimpleSearchParams = {
-	searchTerm: string;
-};
+import type { Article, NarrowedArticle, SimpleSearchParams } from "./types";
 
 const parseSearchTerm = (searchTerm: string) => {
 	const trimmedTerm = searchTerm.trim();
-	const splitTerm = trimmedTerm.split(" ");
-	const filteredSplitTerms = splitTerm.filter((term) => term.length > 3);
+	const splitTerm = trimmedTerm
+		.split(":")
+		.join(" ")
+		.split(",")
+		.join(" ")
+		.split("?")
+		.join(" ")
+		.split('"')
+		.join(" ")
+		.split(" ");
+	const filteredSplitTerms = splitTerm.filter((term) => term.length > 4);
 
-	return filteredSplitTerms;
-};
-
-export const simpleSearch = (simpleSearchParams: SimpleSearchParams): void => {
-	const articles = fetchLocalArticles();
-
-	if (!articles) {
-		throw new Error("no articles found in json backup");
-	}
-
-	logger("filtering to only valid articles");
-
-	const filteredArticles = articles.filter((data) =>
-		isValidMatterArticle(data),
+	const lowerCasedFilteredTerms = filteredSplitTerms.map((term) =>
+		term.toLowerCase(),
 	);
 
-	logger(`number of articles after filtering: ${filteredArticles.length}`);
+	return lowerCasedFilteredTerms;
+};
 
-	const parsedSearchTerms = parseSearchTerm(simpleSearchParams.searchTerm);
+export const simpleSearch = <T>({
+	searchTerm,
+	list,
+}: SimpleSearchParams<T>): NarrowedArticle[] => {
+	const parsedSearchTerms = parseSearchTerm(searchTerm);
 
 	console.log("parsedSearchTerms: ", parsedSearchTerms);
 
-	const foundItems: MatterArticle[] = [];
+	const foundItems: Article[] = [];
 
 	for (const term of parsedSearchTerms) {
-		const matches = filteredArticles.filter((article) => {
+		const matches = list.filter((item) => {
 			return (
-				article.title.toLowerCase().includes(term) ||
-				article.url.toLowerCase().includes(term)
+				item.title.toLowerCase().includes(term) ||
+				item.url.toLowerCase().includes(term)
 			);
 		});
 
@@ -50,8 +46,13 @@ export const simpleSearch = (simpleSearchParams: SimpleSearchParams): void => {
 	}
 
 	logger(`foundItems: ${foundItems.length}`);
-	
-  console.log(foundItems);
-};
 
-const search = simpleSearch({ searchTerm: "browser" });
+	const narrowedFoundItems = foundItems.map((item) => {
+		return {
+			title: item.title,
+			url: item.url,
+		};
+	});
+
+	return narrowedFoundItems;
+};

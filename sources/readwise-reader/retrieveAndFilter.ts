@@ -1,3 +1,5 @@
+import { simpleSearch } from "../../experiments/search/simple-search";
+import type { NarrowedArticle } from "../../experiments/search/types";
 import { fetchLocalArticles } from "../../sources/readwise-reader/fetch";
 import { isValidReadwiseArticle } from "../../sources/readwise-reader/filter";
 import { logger } from "../../utils/logger";
@@ -16,6 +18,7 @@ type RetrieveReadwiseArticlesReturnType = {
 	readwiseArticleUrl: string;
 	readwiseArticleTitle: string;
 	relatedArticles: DocumentContent[];
+	relatedLocalReadwiseArticles: NarrowedArticle[];
 };
 
 export const retrieveReadwiseArticle =
@@ -51,10 +54,16 @@ export const retrieveReadwiseArticle =
 
 		const relatedArticles = await fetchSearch(randomReadwiseArticle.title);
 
+		const relatedLocalReadwiseArticles = simpleSearch({
+			searchTerm: randomReadwiseArticle.title,
+			list: filteredArticles,
+		});
+
 		return {
 			readwiseArticleUrl,
 			readwiseArticleTitle: randomReadwiseArticle.title || readwiseArticleUrl,
 			relatedArticles,
+			relatedLocalReadwiseArticles,
 		};
 	};
 
@@ -110,9 +119,15 @@ export const retrieveWeightedReadwiseArticles =
 
 		const relatedArticles = await fetchSearch(article.title);
 
+		const relatedLocalReadwiseArticles = simpleSearch({
+			searchTerm: article.title,
+			list: filteredArticles,
+		});
+
 		return {
 			readwiseArticleUrl,
 			readwiseArticleTitle: article.title || readwiseArticleUrl,
 			relatedArticles,
+			relatedLocalReadwiseArticles,
 		};
 	};
