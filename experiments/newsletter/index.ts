@@ -16,10 +16,6 @@ const main = async () => {
 
 		const newsletterTemplate = generateEmail({ weeklyArticles });
 
-		console.log("\nsending email...");
-
-		await sendEmail(newsletterTemplate);
-
 		console.log("\nappending to reflect...");
 
 		await appendToReflect(newsletterTemplate);
