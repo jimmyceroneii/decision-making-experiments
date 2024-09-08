@@ -1,4 +1,3 @@
-import { sendEmail } from "../../utils/send";
 import { appendToReflect } from "./append-to-reflect";
 import { generateEmail } from "./generate-email";
 import { retrieveReadwiseArticle } from "./retrieveAndFilter";
