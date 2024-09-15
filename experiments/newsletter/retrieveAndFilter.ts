@@ -1,5 +1,5 @@
-import { fetchLocalArticles } from "../../sources/readwise-reader/fetch";
 import { isWeeklyNewsletter } from "../../sources/readwise-reader/filter";
+import { fetchLocalArticles } from "../../sources/readwise-reader/readwise";
 import type { ReadwiseArticle } from "../../sources/readwise-reader/types";
 
 type RetrieveReadwiseArticlesReturnType = {

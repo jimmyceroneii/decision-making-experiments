@@ -1,4 +1,9 @@
 import fs from "node:fs/promises";
+import {
+	retrieveAllReadwiseArticles,
+	retrieveReadwiseArticleByTag,
+} from "../../sources/readwise-reader/retrieveArticles";
+import type { ReadwiseArticle } from "../../sources/readwise-reader/types";
 import type {
 	ReflectBacklink,
 	ReflectBlock,
@@ -24,6 +29,29 @@ const findBackLinks = (
 	return [];
 };
 
+type FindRawUrlsParams = {
+	backlinks: ReflectBacklink[];
+	readwiseArticles: ReadwiseArticle[];
+};
+
+const findRawUrls = (params: FindRawUrlsParams) => {
+	const { backlinks, readwiseArticles } = params;
+
+	const rawUrls = backlinks.map((backlink) => {
+		const title = backlink.attrs.label;
+		const readwiseArticle = readwiseArticles.find((article) =>
+			article?.title?.includes(title),
+		);
+
+		return {
+			title,
+			url: readwiseArticle?.source_url || readwiseArticle?.url,
+		};
+	});
+
+	return rawUrls;
+};
+
 const main = async () => {
 	try {
 		const filePath =
@@ -39,7 +67,32 @@ const main = async () => {
 			parsedReflectBlock.content;
 
 		const backlinks = findBackLinks(content);
-		console.log("Backlinks:", backlinks);
+		console.log("🔗 Backlinks found: ", backlinks.length);
+
+		const readwiseArticles = retrieveAllReadwiseArticles();
+		console.log("📚 Readwise articles found: ", readwiseArticles.length);
+
+		const rawUrls = findRawUrls({ backlinks, readwiseArticles });
+		console.log("🔗 Raw URLs:", rawUrls.length);
+
+		console.log("\n\n\n");
+
+		// sort so the articles with URLs are at the top
+		rawUrls.sort((a, b) => {
+			if (a.url) {
+				return -1;
+			}
+			if (b.url) {
+				return 1;
+			}
+			return 0;
+		});
+
+		for (const rawUrl of rawUrls) {
+			console.log("Title: ", rawUrl.title);
+			console.log("URL: ", rawUrl.url);
+			console.log("---");
+		}
 	} catch (error) {
 		console.error("Error reading file:", error);
 	}

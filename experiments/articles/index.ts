@@ -1,5 +1,5 @@
 import { retrieveWeightedMatterArticles } from "../../sources/matter/index";
-import { retrieveWeightedReadwiseArticles } from "../../sources/readwise-reader/retrieveAndFilter";
+import { retrieveWeightedReadwiseArticles } from "../../sources/readwise-reader/retrieveArticles";
 import { sendEmail } from "../../utils/send";
 import { generateEmail } from "./generate-email";
 

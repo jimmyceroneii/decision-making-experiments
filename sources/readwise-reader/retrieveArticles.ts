@@ -1,16 +1,16 @@
 import { simpleSearch } from "../../experiments/search/simple-search";
 import type { NarrowedArticle } from "../../experiments/search/types";
-import { fetchLocalArticles } from "../../sources/readwise-reader/fetch";
-import { isValidReadwiseArticle } from "../../sources/readwise-reader/filter";
+import { fetchSearch } from "../../utils/exa";
 import { logger } from "../../utils/logger";
 import { shuffleList } from "../../utils/randomizer";
-import { fetchSearch } from "../../utils/search";
 import type { DocumentContent } from "../../utils/types";
 import {
 	generateWeights,
 	retrieveWeightedItem,
 	sortWeightedList,
 } from "../../utils/weightedRandomizer";
+import { isValidReadwiseArticle } from "./filter";
+import { fetchLocalArticles } from "./readwise";
 import { readwiseArticleWeightFn } from "./readwiseWeightFn";
 import type { ReadwiseArticle } from "./types";
 
@@ -21,7 +21,7 @@ type RetrieveReadwiseArticlesReturnType = {
 	relatedLocalReadwiseArticles: NarrowedArticle[];
 };
 
-export const retrieveReadwiseArticle =
+export const retrieveRandomReadwiseArticle =
 	async (): Promise<RetrieveReadwiseArticlesReturnType> => {
 		const articles = fetchLocalArticles();
 
@@ -131,3 +131,35 @@ export const retrieveWeightedReadwiseArticles =
 			relatedLocalReadwiseArticles,
 		};
 	};
+
+export const retrieveAllReadwiseArticles = (): ReadwiseArticle[] => {
+	const articles = fetchLocalArticles();
+
+	if (!articles) {
+		throw new Error("no articles found in json backup");
+	}
+
+	return articles;
+};
+
+export const retrieveReadwiseArticleByTag = (
+	tagName: string,
+): ReadwiseArticle[] => {
+	const articles = fetchLocalArticles();
+
+	if (!articles) {
+		throw new Error("no articles found in json backup");
+	}
+
+	const filteredArticles = articles.filter((article) => {
+		const tags = Object.keys(article.tags || {});
+
+		if (!tags) {
+			return false;
+		}
+
+		return tags.includes(tagName);
+	});
+
+	return filteredArticles;
+};

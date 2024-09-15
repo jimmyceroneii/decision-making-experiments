@@ -1,6 +1,6 @@
 import * as fs from "node:fs";
+import { fetchSearch, fetchSimilar } from "../../utils/exa";
 import { shuffleList } from "../../utils/randomizer";
-import { fetchSearch, fetchSimilar } from "../../utils/search";
 import { sendEmail } from "../../utils/send";
 import { generateEmail } from "./generate-email";
 

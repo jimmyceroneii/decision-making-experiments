@@ -1,5 +1,5 @@
 import { writeArrayToFile } from "../../utils/writeFile";
-import { fetchDocumentListApi } from "./fetch";
+import { fetchDocumentListApi } from "./readwise";
 import type { ReadwiseArticle } from "./types";
 
 const main = async () => {

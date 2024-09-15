@@ -1,8 +1,8 @@
 import { simpleSearch } from "../../experiments/search/simple-search";
 import type { NarrowedArticle } from "../../experiments/search/types";
+import { fetchSimilar } from "../../utils/exa";
 import { logger } from "../../utils/logger";
 import { shuffleList } from "../../utils/randomizer";
-import { fetchSimilar } from "../../utils/search";
 import {
 	generateWeights,
 	retrieveWeightedItem,
