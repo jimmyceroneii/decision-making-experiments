@@ -2,7 +2,7 @@ name: Daily Random Article
 
 on:
   schedule:
-    - cron: '0 11 * * *' # Runs the job every day at 6 am EST
+    - cron: '0 23 * * *' # Runs the job every day at 6 pm EST
   workflow_dispatch: # allow for manual trigger
 
 jobs:
