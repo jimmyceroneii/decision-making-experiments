@@ -39,9 +39,14 @@ const findRawUrls = (params: FindRawUrlsParams) => {
 
 	const rawUrls = backlinks.map((backlink) => {
 		const title = backlink.attrs.label;
-		const readwiseArticle = readwiseArticles.find((article) =>
-			article?.title?.includes(title),
-		);
+		const titleLettersOnly = title.replace(/[^a-zA-Z]/g, "").toLowerCase();
+
+		const readwiseArticle = readwiseArticles.find((article) => {
+			const articleTitleLettersOnly = article.title
+				?.replace(/[^a-zA-Z]/g, "")
+				.toLowerCase();
+			return articleTitleLettersOnly?.includes(titleLettersOnly);
+		});
 
 		return {
 			title,
