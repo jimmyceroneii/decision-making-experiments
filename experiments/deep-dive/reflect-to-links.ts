@@ -1,8 +1,5 @@
 import fs from "node:fs/promises";
-import {
-	retrieveAllReadwiseArticles,
-	retrieveReadwiseArticleByTag,
-} from "../../sources/readwise-reader/retrieveArticles";
+import { retrieveAllReadwiseArticles } from "../../sources/readwise-reader/retrieveArticles";
 import type { ReadwiseArticle } from "../../sources/readwise-reader/types";
 import type {
 	ReflectBacklink,
