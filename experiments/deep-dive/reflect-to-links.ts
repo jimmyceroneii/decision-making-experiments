@@ -1,48 +1,27 @@
 import fs from "node:fs/promises";
+import type {
+	ReflectBacklink,
+	ReflectBlock,
+	ReflectContent,
+	ReflectDocument,
+} from "./types";
 
-type ReflectDocument = {
-	id: string;
-	subject: string;
-	document_json: string;
-	created_at: string;
-	updated_at: string;
-	edited_at: string;
-	daily_at: unknown;
-	backlinked_count: number;
-};
-
-type ReflectBlock = {
-	type: string;
-	attrs: Record<string, unknown>;
-	content: ReflectContent | ReflectContent[];
-};
-
-interface ReflectContent {
-	type: string;
-	text: string;
-	attrs: Record<string, unknown>;
-	content?: ReflectContent[];
-};
-
-interface ReflectBacklink extends ReflectContent {
-	type: 'backlink';
-	attrs: {
-		id: string;
-		label: string;
-		graphId: string;
-	}
-}
-
-const findBackLinks = (content: ReflectContent | ReflectContent[]): ReflectBacklink[] => {
+const findBackLinks = (
+	content: ReflectContent | ReflectContent[],
+): ReflectBacklink[] => {
 	if (Array.isArray(content)) {
-        return content.flatMap(findBackLinks);
-    } else if (Array.isArray(content.content)) {
+		return content.flatMap(findBackLinks);
+	}
+	// biome-ignore lint: This else clause is necessary for the function's logic
+	else if (Array.isArray(content.content)) {
 		return content.content.flatMap(findBackLinks);
-	}  else if (content.type === 'backlink') {
-        return [content as ReflectBacklink];
-    } else {
-		return [];
-	}    
+	}
+	// biome-ignore lint: This else clause is necessary for the function's logic
+	else if (content.type === "backlink") {
+		return [content as ReflectBacklink];
+	}
+
+	return [];
 };
 
 const main = async () => {
@@ -56,8 +35,9 @@ const main = async () => {
 		const jsonContent = reflectDocument.document_json;
 		const parsedReflectBlock: ReflectBlock = JSON.parse(jsonContent);
 
-		const content: ReflectContent[] | ReflectContent = parsedReflectBlock.content;
-		
+		const content: ReflectContent[] | ReflectContent =
+			parsedReflectBlock.content;
+
 		const backlinks = findBackLinks(content);
 		console.log("Backlinks:", backlinks);
 	} catch (error) {
