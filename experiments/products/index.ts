@@ -1,44 +1,31 @@
-import * as fs from "node:fs";
-import { fetchSearch, fetchSimilar } from "../../utils/exa";
-import { shuffleList } from "../../utils/randomizer";
+import { retrieveRandomMatterProduct } from "../../sources/matter";
+import { retrieveRandomRemindersProduct } from "../../sources/products-reminders-export";
 import { sendEmail } from "../../utils/send";
 import { generateEmail } from "./generate-email";
+import { fetchProductInformation } from "./utils";
 
 const main = async () => {
-	const filePath: string = "sources/products-reminders-export/products.txt";
+	const remindersProduct = retrieveRandomRemindersProduct();
+	const matterProduct = retrieveRandomMatterProduct();
 
-	try {
-		const fileContent: string = fs.readFileSync(filePath, "utf-8");
-		const products: string[] = fileContent.split("\n");
+	const { sourceUrls: remindersSources, similar: remindersSimilarProducts } =
+		await fetchProductInformation(remindersProduct);
 
-		const randomProduct = shuffleList(products)[0];
+	const { sourceUrls: matterSources, similar: matterSimilarProducts } =
+		await fetchProductInformation(matterProduct.url);
 
-		console.log("Product: ", randomProduct);
+	const emailHtml = generateEmail({
+		remindersProduct,
+		remindersSources,
+		remindersSimilarProducts,
+		matterProduct: matterProduct.url,
+		matterSources,
+		matterSimilarProducts,
+	});
 
-		console.log("Finding news stories...");
+	await sendEmail(emailHtml);
 
-		const sources = await fetchSearch(
-			`Here is some information about the following product: ${randomProduct}`,
-		);
-
-		const sourceUrls = sources.map((source) => source.url);
-
-		console.log("Sources: ", sourceUrls);
-
-		console.log("Finding similar products...");
-
-		const similar = await fetchSimilar(randomProduct);
-
-		console.log("Similar: ", similar);
-
-		const emailHtml = generateEmail(randomProduct, sourceUrls, similar);
-
-		await sendEmail(emailHtml);
-
-		console.log("sent product of the week");
-	} catch (error) {
-		console.error(`Error with the product of the week: ${error}`);
-	}
+	console.log("sent product of the week");
 };
 
 main();

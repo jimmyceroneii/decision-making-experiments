@@ -141,3 +141,19 @@ export const retrieveMatterArticles =
 			relatedLocalMatterArticles,
 		};
 	};
+
+export const retrieveRandomMatterProduct = (): MatterArticle => {
+	const articles = fetchLocalArticles();
+
+	if (!articles) {
+		throw new Error("no local products found");
+	}
+
+	const products = articles.filter((article) =>
+		article.tags.includes("products"),
+	);
+
+	const randomProduct = shuffleList(products)[0];
+
+	return randomProduct;
+};
