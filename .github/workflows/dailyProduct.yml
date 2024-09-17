@@ -2,7 +2,7 @@ name: Weekly Product
 
 on:
     schedule:
-      - cron: '0 0 * * 5' # Runs the job every Friday
+      - cron: '0 5 * * 1-5' # Runs the job every weekday at 5 AM UTC
     workflow_dispatch: # allow for manual trigger
 
 jobs:
