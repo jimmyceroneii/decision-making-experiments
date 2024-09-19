@@ -1,41 +1,42 @@
 <html>
    <body>
       <h1>Reminders Product of the Day: <%= remindersProduct %></h1>
-      <p>Sources</p>
+      <h1>Matter Product of the Day: <%= matterProduct %></h1>
+      <h1>Readwise Product of the Day: <%= readwiseProduct %></h1>
+
+      <p>Reminders Sources</p>
       <ul>
         <% remindersSources.forEach(function(source) { %>
             <li><a href="<%= source %>"><%= source %></a></li>
         <% }); %>
       </ul>
-      <p>Similar Products</p>
+      <p>Reminders Similar Products</p>
       <ul> 
         <% remindersSimilarProducts.forEach(function(similarProduct) { %>
             <li><a href="<%= similarProduct %>"><%= similarProduct %></a></li>
         <% }); %>
       </ul>
-
-      <h1>Matter Product of the Day: <%= matterProduct %></h1>
-      <p>Sources</p>
+      
+      <p>Matter Sources</p>
       <ul>
         <% matterSources.forEach(function(source) { %>
             <li><a href="<%= source %>"><%= source %></a></li>
         <% }); %>
       </ul>
-      <p>Similar Products</p>
+      <p>Matter Similar Products</p>
       <ul> 
         <% matterSimilarProducts.forEach(function(similarProduct) { %>
             <li><a href="<%= similarProduct %>"><%= similarProduct %></a></li>
         <% }); %>
       </ul>
 
-      <h1>Readwise Product of the Day: <%= readwiseProduct %></h1>
-      <p>Sources</p>
+      <p>Readwise Sources</p>
       <ul>
         <% readwiseSources.forEach(function(source) { %>
             <li><a href="<%= source %>"><%= source %></a></li>
         <% }); %>
       </ul>
-      <p>Similar Products</p>
+      <p>Readwise Similar Products</p>
       <ul> 
         <% readwiseSimilarProducts.forEach(function(similarProduct) { %>
             <li><a href="<%= similarProduct %>"><%= similarProduct %></a></li>

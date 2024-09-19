@@ -17,7 +17,9 @@ const main = async () => {
 		await fetchProductInformation(matterProduct.url);
 
 	const { sourceUrls: readwiseSources, similar: readwiseSimilarProducts } =
-		await fetchProductInformation(readwiseProduct.source_url || readwiseProduct.url);
+		await fetchProductInformation(
+			readwiseProduct.source_url || readwiseProduct.url,
+		);
 
 	const emailHtml = generateEmail({
 		remindersProduct,
