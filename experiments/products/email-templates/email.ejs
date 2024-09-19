@@ -1,6 +1,6 @@
 <html>
    <body>
-      <h1>Reminders Product of the Week: <%= remindersProduct %></h1>
+      <h1>Reminders Product of the Day: <%= remindersProduct %></h1>
       <p>Sources</p>
       <ul>
         <% remindersSources.forEach(function(source) { %>
@@ -14,7 +14,7 @@
         <% }); %>
       </ul>
 
-      <h1>Matter Product of the Week: <%= matterProduct %></h1>
+      <h1>Matter Product of the Day: <%= matterProduct %></h1>
       <p>Sources</p>
       <ul>
         <% matterSources.forEach(function(source) { %>
@@ -24,6 +24,20 @@
       <p>Similar Products</p>
       <ul> 
         <% matterSimilarProducts.forEach(function(similarProduct) { %>
+            <li><a href="<%= similarProduct %>"><%= similarProduct %></a></li>
+        <% }); %>
+      </ul>
+
+      <h1>Readwise Product of the Day: <%= readwiseProduct %></h1>
+      <p>Sources</p>
+      <ul>
+        <% readwiseSources.forEach(function(source) { %>
+            <li><a href="<%= source %>"><%= source %></a></li>
+        <% }); %>
+      </ul>
+      <p>Similar Products</p>
+      <ul> 
+        <% readwiseSimilarProducts.forEach(function(similarProduct) { %>
             <li><a href="<%= similarProduct %>"><%= similarProduct %></a></li>
         <% }); %>
       </ul>

@@ -45,3 +45,28 @@ const isValidCategory = (category: keyof typeof CATEGORIES) => {
 		category === CATEGORIES.rss
 	);
 };
+
+export const isValidProduct = (product: ReadwiseArticle): boolean => {
+	// if there are no tags this is not it
+	if (!product.tags) return false;
+
+	// if the products is not in the tags, not valid
+	let isProductTag = false;
+
+	for (const tag of Object.keys(product.tags)) {
+		if (tag === "products") {
+			isProductTag = true;
+		}
+	}
+
+	if (!isProductTag) return false;
+
+	// if there is no id or url, we are in trouble
+	return (
+		product.id !== undefined &&
+		product.id.length > 0 &&
+		product.url.length > 0 &&
+		product.title !== undefined &&
+		product.title.length > 0
+	);
+};

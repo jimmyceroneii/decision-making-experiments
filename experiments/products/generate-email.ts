@@ -8,6 +8,9 @@ type GenerateEmailParams = {
 	matterProduct: string;
 	matterSources: string[];
 	matterSimilarProducts: string[];
+	readwiseProduct: string;
+	readwiseSources: string[];
+	readwiseSimilarProducts: string[];
 };
 
 export const generateEmail = ({
@@ -17,6 +20,9 @@ export const generateEmail = ({
 	matterProduct,
 	matterSources,
 	matterSimilarProducts,
+	readwiseProduct,
+	readwiseSources,
+	readwiseSimilarProducts,
 }: GenerateEmailParams) => {
 	const templateString = fs.readFileSync(
 		"experiments/products/email-templates/email.ejs",
@@ -30,5 +36,8 @@ export const generateEmail = ({
 		matterProduct,
 		matterSources,
 		matterSimilarProducts,
+		readwiseProduct,
+		readwiseSources,
+		readwiseSimilarProducts,
 	});
 };
