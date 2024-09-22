@@ -3,39 +3,37 @@ import { fetchLocalReadwiseArticles } from "../../sources/readwise-reader/readwi
 import { simpleSearch } from "../search/simple-search";
 
 const findLocalMatterArticles = (searchTerm: string) => {
-    const articles = fetchLocalMatterArticles();
+	const articles = fetchLocalMatterArticles();
 
-    if (!articles) {
-        return [];
-    }
+	if (!articles) {
+		return [];
+	}
 
-    
+	const relatedArticles = simpleSearch({ searchTerm, list: articles });
 
-    const relatedArticles = simpleSearch({ searchTerm, list: articles });
-    
-    return relatedArticles;
-}
+	return relatedArticles;
+};
 
 const findLocalReadwiseArticles = (searchTerm: string) => {
-    const articles = fetchLocalReadwiseArticles();
+	const articles = fetchLocalReadwiseArticles();
 
-    if (!articles) {
-        return [];
-    }
+	if (!articles) {
+		return [];
+	}
 
-    const relatedArticles = simpleSearch({ searchTerm, list: articles });
-    
-    return relatedArticles;
-}
+	const relatedArticles = simpleSearch({ searchTerm, list: articles });
+
+	return relatedArticles;
+};
 
 const findLocalArticlesForDeepDive = (searchTerm: string) => {
-    const matterArticles = findLocalMatterArticles(searchTerm);
-    const readwiseArticles = findLocalReadwiseArticles(searchTerm);
+	const matterArticles = findLocalMatterArticles(searchTerm);
+	const readwiseArticles = findLocalReadwiseArticles(searchTerm);
 
-    return {
-        matterArticles,
-        readwiseArticles,
-    };
-}
+	return {
+		matterArticles,
+		readwiseArticles,
+	};
+};
 
 console.log(findLocalArticlesForDeepDive("frank"));
