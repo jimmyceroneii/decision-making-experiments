@@ -101,7 +101,7 @@ export const retrieveArticlesAndFormat = async () => {
 	return await convertCsvToTypedArray(filePath);
 };
 
-export const fetchLocalArticles = (): MatterArticle[] | undefined => {
+export const fetchLocalMatterArticles = (): MatterArticle[] | undefined => {
 	let data: MatterArticle[];
 
 	try {

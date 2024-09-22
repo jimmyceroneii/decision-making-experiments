@@ -10,7 +10,7 @@ import {
 	sortWeightedList,
 } from "../../utils/weightedRandomizer";
 import { isValidReadwiseArticle } from "./filter";
-import { fetchLocalArticles } from "./readwise";
+import { fetchLocalReadwiseArticles } from "./readwise";
 import { readwiseArticleWeightFn } from "./readwiseWeightFn";
 import type { ReadwiseArticle } from "./types";
 
@@ -23,7 +23,7 @@ type RetrieveReadwiseArticlesReturnType = {
 
 export const retrieveRandomReadwiseArticle =
 	async (): Promise<RetrieveReadwiseArticlesReturnType> => {
-		const articles = fetchLocalArticles();
+		const articles = fetchLocalReadwiseArticles();
 
 		if (!articles) {
 			throw new Error("no articles found in json backup");
@@ -69,7 +69,7 @@ export const retrieveRandomReadwiseArticle =
 
 export const retrieveWeightedReadwiseArticles =
 	async (): Promise<RetrieveReadwiseArticlesReturnType> => {
-		const articles = fetchLocalArticles();
+		const articles = fetchLocalReadwiseArticles();
 
 		if (!articles) {
 			throw new Error("no articles found in json backup");
@@ -133,7 +133,7 @@ export const retrieveWeightedReadwiseArticles =
 	};
 
 export const retrieveAllReadwiseArticles = (): ReadwiseArticle[] => {
-	const articles = fetchLocalArticles();
+	const articles = fetchLocalReadwiseArticles();
 
 	if (!articles) {
 		throw new Error("no articles found in json backup");
@@ -145,7 +145,7 @@ export const retrieveAllReadwiseArticles = (): ReadwiseArticle[] => {
 export const retrieveReadwiseArticleByTag = (
 	tagName: string,
 ): ReadwiseArticle[] => {
-	const articles = fetchLocalArticles();
+	const articles = fetchLocalReadwiseArticles();
 
 	if (!articles) {
 		throw new Error("no articles found in json backup");

@@ -30,7 +30,7 @@ export const fetchDocumentListApi = async () => {
 	return fullData;
 };
 
-export const fetchLocalArticles = (): ReadwiseArticle[] | undefined => {
+export const fetchLocalReadwiseArticles = (): ReadwiseArticle[] | undefined => {
 	let data: ReadwiseArticle[];
 
 	try {

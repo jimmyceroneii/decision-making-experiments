@@ -35,8 +35,8 @@ export const simpleSearch = <T>({
 	for (const term of parsedSearchTerms) {
 		const matches = list.filter((item) => {
 			return (
-				item.title.toLowerCase().includes(term) ||
-				item.url.toLowerCase().includes(term)
+				item?.title?.toLowerCase().includes(term) ||
+				item?.url?.toLowerCase().includes(term)
 			);
 		});
 

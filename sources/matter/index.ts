@@ -11,7 +11,7 @@ import {
 import { isValidMatterArticle } from "./filter";
 import { matterArticleWeightFn } from "./matterWeightFn";
 import {
-	fetchLocalArticles,
+	fetchLocalMatterArticles,
 	retrieveArticlesAndFormat,
 } from "./processMatterCsv";
 import type { MatterArticle } from "./types";
@@ -116,7 +116,7 @@ export const retrieveRandomMatterArticle = async (
 
 export const retrieveMatterArticles =
 	async (): Promise<RetrieveMatterArticlesReturnType> => {
-		const matterArticles = fetchLocalArticles();
+		const matterArticles = fetchLocalMatterArticles();
 
 		if (!matterArticles) {
 			throw new Error("no local articles found");
@@ -143,7 +143,7 @@ export const retrieveMatterArticles =
 	};
 
 export const retrieveRandomMatterProduct = (): MatterArticle => {
-	const articles = fetchLocalArticles();
+	const articles = fetchLocalMatterArticles();
 
 	if (!articles) {
 		throw new Error("no local products found");

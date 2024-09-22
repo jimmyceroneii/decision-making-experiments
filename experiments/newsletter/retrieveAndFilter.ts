@@ -1,5 +1,5 @@
 import { isWeeklyNewsletter } from "../../sources/readwise-reader/filter";
-import { fetchLocalArticles } from "../../sources/readwise-reader/readwise";
+import { fetchLocalReadwiseArticles } from "../../sources/readwise-reader/readwise";
 import type { ReadwiseArticle } from "../../sources/readwise-reader/types";
 
 type RetrieveReadwiseArticlesReturnType = {
@@ -8,7 +8,7 @@ type RetrieveReadwiseArticlesReturnType = {
 
 export const retrieveReadwiseArticle =
 	async (): Promise<RetrieveReadwiseArticlesReturnType> => {
-		const articles = fetchLocalArticles();
+		const articles = fetchLocalReadwiseArticles();
 
 		if (!articles) {
 			throw new Error("no articles found in sync");

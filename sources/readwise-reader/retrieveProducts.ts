@@ -1,10 +1,10 @@
 import { shuffleList } from "../../utils/randomizer";
 import { isValidProduct } from "./filter";
-import { fetchLocalArticles } from "./readwise";
+import { fetchLocalReadwiseArticles } from "./readwise";
 import type { ReadwiseArticle } from "./types";
 
 export const retrieveRandomReadwiseProduct = (): ReadwiseArticle => {
-	const articles = fetchLocalArticles();
+	const articles = fetchLocalReadwiseArticles();
 
 	if (!articles) {
 		throw new Error("no articles found in json backup");

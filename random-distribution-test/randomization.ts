@@ -1,9 +1,9 @@
 import { retrieveRandomMatterArticle } from "../sources/matter";
-import { fetchLocalArticles } from "../sources/matter/processMatterCsv";
+import { fetchLocalMatterArticles } from "../sources/matter/processMatterCsv";
 
 type SelectedElements = Record<string, number>;
 
-const matterArticles = fetchLocalArticles();
+const matterArticles = fetchLocalMatterArticles();
 
 if (!matterArticles) {
 	throw new Error("no local articles found");
