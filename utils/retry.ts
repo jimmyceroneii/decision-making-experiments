@@ -42,7 +42,7 @@ type UploadResponse = {
 
 export const sendUploadRequestWithRetry = async <T>(
 	url: string,
-	tag: string,
+	tag: string | null,
 	retries = 0,
 ): Promise<UploadResponse> => {
 	try {
@@ -54,7 +54,7 @@ export const sendUploadRequestWithRetry = async <T>(
 			},
 			body: JSON.stringify({
 				url,
-				tags: [tag],
+				tags: tag ? [tag] : null,
 			}),
 		});
 

@@ -7,12 +7,7 @@ const token = process.env.READWISE_API_TOKEN || "";
 
 type BulkUploadReadwiseArticlesParams = {
 	urls: string[];
-	tag: string;
-};
-
-type UploadResponse = {
-	id: string;
-	url: string;
+	tag: string | null;
 };
 
 const bulkUploadReadwiseArticles = async ({
@@ -28,7 +23,7 @@ const bulkUploadReadwiseArticles = async ({
 const uploadOneTabUrls = () => {
 	const urls = processOneTab();
 
-	const tag = "frank-sinatra-deep-dive";
+	const tag = null;
 
 	bulkUploadReadwiseArticles({ urls, tag });
 };

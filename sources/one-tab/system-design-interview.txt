@@ -1,0 +1,11 @@
+https://thejeshgn.com/2016/07/27/couchdb-is-my-personal-baas/ | CouchDB is my personal BaaS | Thejesh GN
+https://bergie.iki.fi/blog/jquery_and_couchdb-001/ | jQuery and CouchDB - Henri Bergius
+https://subvisual.com/blog/posts/130-how-to-build-offline-web-applications-with-couchdb-and-pouchdb/ | Subvisual | How to build offline web applications with CouchDB and PouchDB
+http://pawelstawicki.blogspot.com/2009/12/couchdb.html | Java, the Programming, and Everything: CouchDB
+https://nitschinger.at/Using-Couchbase-as-a-flexible-session-store/ | Using Couchbase as a flexible session store – daschl writes. sometimes.
+http://gregdmd.com/blog/2014/06/22/extracting-your-linkedin-connections-into-neo4j-graph-database/ | Extracting Your LinkedIn Connections Into Neo4j Graph Database - Greg Dziemidowicz's Blog
+https://www.danielgorelick.com/projects/creative-code-with-github | Dan Gorelick Studio
+https://codeahoy.com/2017/08/11/caching-strategies-and-how-to-choose-the-right-one/ | Caching Strategies and How to Choose the Right One | CodeAhoy
+https://scontent.fagc1-1.fna.fbcdn.net/v/t39.8562-6/240873052_277412237132971_6278324660880331641_n.pdf?_nc_cat=101&ccb=1-7&_nc_sid=e280be&_nc_ohc=SsEounXJ4O4Q7kNvgH43Wv7&_nc_ht=scontent.fagc1-1.fna&_nc_gid=Agafmb-buLTbDQQD8Nq70WL&oh=00_AYAa44Bn5TqTfz17W2hu4m5iNNERP7sYgE_zy7rkv1H3wQ&oe=66F7DB42 | 
+https://nickcraver.com/blog/2013/11/22/what-it-takes-to-run-stack-overflow/ | Nick Craver - What it takes to run Stack Overflow
+https://highscalability.com/what-the-heck-are-you-actually-using-nosql-for/ | What the heck are you actually using NoSQL for? - High Scalability -
