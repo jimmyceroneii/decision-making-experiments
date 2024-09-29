@@ -23,7 +23,7 @@ const bulkUploadReadwiseArticles = async ({
 const uploadOneTabUrls = () => {
 	const urls = processOneTab();
 
-	const tag = "books";
+	const tag = "mens-group";
 
 	bulkUploadReadwiseArticles({ urls, tag });
 };
