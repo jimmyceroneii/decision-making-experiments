@@ -1,7 +1,7 @@
 import * as fs from "node:fs";
 
 export const processOneTab = (): string[] => {
-	const file = fs.readFileSync("sources/one-tab/mens-group.txt", "utf8");
+	const file = fs.readFileSync("sources/one-tab/spent-reqs.txt", "utf8");
 
 	const urls = file
 		.split("\n")
