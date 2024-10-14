@@ -1,14 +1,15 @@
-export const SearchResult: React.FC = () => {
-  const link: string = "https://google.com";
-  const title: string = "Title";
-  const preview: string = "Preview of text here.";
+import { NarrowedArticle } from "./utils/types";
 
+type SearchResultParams = {
+  result: NarrowedArticle;
+};
+
+export const SearchResult: React.FC<SearchResultParams> = ({ result }) => {
   return (
     <div>
       <h1>
-        <a href={link}>{title}</a>
+        <a href={result?.url || ""}>{result?.title || ""}</a>
       </h1>
-      <p>{preview}</p>
     </div>
   );
 };
