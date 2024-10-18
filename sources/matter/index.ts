@@ -73,14 +73,19 @@ export const retrieveWeightedMatterArticles =
 
 		logger("Finding similar matter articles with EXA...");
 
-		const similarMatterArticles = await fetchSimilar(article.url);
+		const similarMatterArticlesUntrimmed = await fetchSimilar(article.url);
 
 		logger("Finding similar matter articles locally...");
 
-		const relatedLocalMatterArticles = simpleSearch({
+		const relatedLocalMatterArticlesUntrimmed = simpleSearch({
 			searchTerm: article.title,
 			list: filteredMatterArticles,
 		});
+
+		// trim to only 3 for local and exa
+		const similarMatterArticles = similarMatterArticlesUntrimmed.slice(0, 3);
+		const relatedLocalMatterArticles =
+			relatedLocalMatterArticlesUntrimmed.slice(0, 3);
 
 		return {
 			matterArticleUrl: article.url,

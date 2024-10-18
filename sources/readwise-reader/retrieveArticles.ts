@@ -117,12 +117,17 @@ export const retrieveWeightedReadwiseArticles =
 
 		console.log("Finding related articles...");
 
-		const relatedArticles = await fetchSearch(article.title);
+		const relatedArticlesUntrimmed = await fetchSearch(article.title);
 
-		const relatedLocalReadwiseArticles = simpleSearch({
+		const relatedLocalReadwiseArticlesUntrimmed = simpleSearch({
 			searchTerm: article.title,
 			list: filteredArticles,
 		});
+
+		// filter down to smaller number of local and related articles
+		const relatedArticles = relatedArticlesUntrimmed.slice(0, 3);
+		const relatedLocalReadwiseArticles =
+			relatedLocalReadwiseArticlesUntrimmed.slice(0, 3);
 
 		return {
 			readwiseArticleUrl,

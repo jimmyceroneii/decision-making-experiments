@@ -4,6 +4,7 @@ import type { DocumentContent } from "../../utils/types";
 import type { NarrowedArticle } from "../search/types";
 
 type GenerateEmailParams = {
+	albumUrl: string;
 	readwiseArticleUrl: string;
 	readwiseArticleTitle: string;
 	relatedArticles: DocumentContent[];
@@ -15,6 +16,7 @@ type GenerateEmailParams = {
 };
 
 export const generateEmail = ({
+	albumUrl,
 	readwiseArticleUrl,
 	readwiseArticleTitle,
 	relatedArticles,
@@ -30,6 +32,7 @@ export const generateEmail = ({
 	);
 
 	return ejs.render(templateString, {
+		albumUrl,
 		readwiseArticleUrl,
 		readwiseArticleTitle,
 		relatedArticles,

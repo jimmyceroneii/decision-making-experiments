@@ -1,6 +1,7 @@
 import { retrieveWeightedMatterArticles } from "../../sources/matter/index";
 import { retrieveWeightedReadwiseArticles } from "../../sources/readwise-reader/retrieveArticles";
 import { sendEmail } from "../../utils/send";
+import { retrieveRandomAlbum } from "../music";
 import { generateEmail } from "./generate-email";
 
 const main = async () => {
@@ -18,7 +19,10 @@ const main = async () => {
 			relatedLocalMatterArticles,
 		} = await retrieveWeightedMatterArticles();
 
+		const albumOfTheDay = retrieveRandomAlbum();
+
 		const emailHtml = generateEmail({
+			albumUrl: albumOfTheDay.source_url,
 			readwiseArticleUrl,
 			readwiseArticleTitle,
 			relatedArticles,
