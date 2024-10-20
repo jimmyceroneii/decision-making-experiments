@@ -1,4 +1,4 @@
-import { matterArticleWeightFn } from "../sources/matter/matterWeightFn";
+import { matterArticleWeightFn } from "../backend/sources/matter/matterWeightFn";
 import { generateMatterTestArticle } from "./helper";
 
 describe("matterWeightFn", () => {

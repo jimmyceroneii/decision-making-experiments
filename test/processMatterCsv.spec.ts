@@ -1,11 +1,11 @@
 import {
 	convertToBoolean,
 	convertToId,
-} from "../sources/matter/processMatterCsv";
+} from "../backend/sources/matter/processMatterCsv";
 import {
 	type MatterArticle,
 	matterArticleSchema,
-} from "../sources/matter/types";
+} from "../backend/sources/matter/types";
 
 describe("Article Schema", () => {
 	const validArticle: MatterArticle = {
