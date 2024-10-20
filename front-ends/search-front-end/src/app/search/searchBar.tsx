@@ -1,14 +1,22 @@
-import { NarrowedArticle } from "./utils/types";
+import { Dispatch, SetStateAction, useState } from "react";
+import { MatterArticle, NarrowedArticle } from "./utils/types";
+import { simpleSearch } from "./utils/search";
 
 type SearchBarParams = {
-  searchTerm: string;
-  searchFn: (term: string) => NarrowedArticle[];
+  articles: MatterArticle[];
+  setSearchResults: Dispatch<SetStateAction<NarrowedArticle[]>>;
 };
 
 export const SearchBar: React.FC<SearchBarParams> = ({
-  searchTerm,
-  searchFn,
+  articles,
+  setSearchResults,
 }: SearchBarParams) => {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const searchFn = (searchTerm: string): void => {
+    setSearchResults(simpleSearch({ searchTerm, list: articles }).slice(0, 9));
+  };
+
   return (
     <div className="relative">
       <input
@@ -18,6 +26,7 @@ export const SearchBar: React.FC<SearchBarParams> = ({
         placeholder="Search..."
         value={searchTerm}
         onChange={(e) => {
+          setSearchTerm(e.target.value);
           searchFn(e.target.value);
         }}
       />
