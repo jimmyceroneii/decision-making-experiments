@@ -1,5 +1,5 @@
-import { simpleSearch } from "../experiments/search/simple-search";
-import type { ReadwiseArticle } from "../sources/readwise-reader/types";
+import { simpleSearch } from "../backend/experiments/search/simple-search";
+import type { ReadwiseArticle } from "../backend/sources/readwise-reader/types";
 import { generateReadwiseTestArticle } from "./helper";
 
 describe("simpleSearch", () => {

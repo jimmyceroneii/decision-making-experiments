@@ -1,5 +1,5 @@
-import { isWeeklyNewsletter } from "../sources/readwise-reader/filter";
-import type { ReadwiseArticle, Tags } from "../sources/readwise-reader/types";
+import { isWeeklyNewsletter } from "../backend/sources/readwise-reader/filter";
+import type { ReadwiseArticle, Tags } from "../backend/sources/readwise-reader/types";
 import { generateReadwiseTestArticle } from "./helper";
 
 describe("filter", () => {

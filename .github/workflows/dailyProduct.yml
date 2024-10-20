@@ -30,4 +30,4 @@ jobs:
               run: yarn
 
             - name: Run script
-              run: bun experiments/products/index.ts
+              run: bun backend/experiments/products/index.ts

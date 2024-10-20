@@ -1,8 +1,8 @@
-import { isValidReadwiseArticle } from "../sources/readwise-reader/filter";
+import { isValidReadwiseArticle } from "../backend/sources/readwise-reader/filter";
 import {
 	CATEGORIES,
 	type ReadwiseArticle,
-} from "../sources/readwise-reader/types";
+} from "../backend/sources/readwise-reader/types";
 import { generateReadwiseTestArticle } from "./helper";
 
 describe("filter", () => {

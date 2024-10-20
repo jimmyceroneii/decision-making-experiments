@@ -41,7 +41,7 @@ jobs:
         run: yarn
 
       - name: run script
-        run: bun sources/readwise-reader/sync.ts
+        run: bun backend/sources/readwise-reader/sync.ts
 
       - name: Push changes
         run: |

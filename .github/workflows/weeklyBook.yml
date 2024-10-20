@@ -27,4 +27,4 @@ jobs:
             run: yarn
 
           - name: Run script
-            run: bun experiments/books/index.ts
+            run: bun backend/experiments/books/index.ts

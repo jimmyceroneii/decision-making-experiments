@@ -1,9 +1,9 @@
 import Chance from "chance";
-import type { MatterArticle } from "../sources/matter/types";
+import type { MatterArticle } from "../backend/sources/matter/types";
 import {
 	CATEGORIES,
 	type ReadwiseArticle,
-} from "../sources/readwise-reader/types";
+} from "../backend/sources/readwise-reader/types";
 
 const chance = new Chance();
 
