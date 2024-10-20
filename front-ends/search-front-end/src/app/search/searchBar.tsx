@@ -3,20 +3,14 @@ import { MatterArticle, NarrowedArticle } from "./utils/types";
 import { simpleSearch } from "./utils/search";
 
 type SearchBarParams = {
-  articles: MatterArticle[];
-  setSearchResults: Dispatch<SetStateAction<NarrowedArticle[]>>;
+  searchTerm: string;
+  setSearchTerm: Dispatch<SetStateAction<string>>;
 };
 
 export const SearchBar: React.FC<SearchBarParams> = ({
-  articles,
-  setSearchResults,
+  searchTerm,
+  setSearchTerm,
 }: SearchBarParams) => {
-  const [searchTerm, setSearchTerm] = useState('');
-
-  const searchFn = (searchTerm: string): void => {
-    setSearchResults(simpleSearch({ searchTerm, list: articles }).slice(0, 9));
-  };
-
   return (
     <div className="relative">
       <input
@@ -27,7 +21,6 @@ export const SearchBar: React.FC<SearchBarParams> = ({
         value={searchTerm}
         onChange={(e) => {
           setSearchTerm(e.target.value);
-          searchFn(e.target.value);
         }}
       />
     </div>

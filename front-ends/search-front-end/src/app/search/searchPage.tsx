@@ -4,9 +4,11 @@ import { useEffect, useState } from "react";
 import { SearchBar } from "./searchBar";
 import { MatterArticle, NarrowedArticle } from "./utils/types";
 import { fetchLocalMatterArticles } from "./utils/sources";
-import { SearchResultContainer } from "./searcResultContainer";
+import { SearchResultContainer } from "./searchResultContainer";
+import { simpleSearch } from "./utils/search";
 
 export const SearchPage: React.FC = () => {
+  const [searchTerm, setSearchTerm] = useState('');
   const [articles, setArticles] = useState<MatterArticle[]>([]);
   const [searchResults, setSearchResults] = useState<NarrowedArticle[]>([]);
 
@@ -20,9 +22,13 @@ export const SearchPage: React.FC = () => {
     setArticles(data);
   }, []);
 
+  useEffect(() => {
+      setSearchResults(simpleSearch({ searchTerm, list: articles }).slice(0, 9));
+  }, [searchTerm])
+
   return (
     <div>
-      <SearchBar articles={articles} setSearchResults={setSearchResults} />
+      <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <SearchResultContainer results={searchResults} />
     </div>
   );
