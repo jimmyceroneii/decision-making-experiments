@@ -18,7 +18,7 @@ export const fetchSimilar = async (url: string): Promise<string[]> => {
 
 	const similar: { results: Result[] } = await rawSimilar.json();
 
-	return similar.results.map((result) => result.url);
+	return similar?.results?.map((result) => result.url) || [];
 };
 
 export const fetchSearch = async (

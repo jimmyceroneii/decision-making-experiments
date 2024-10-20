@@ -1,0 +1,1 @@
+I do not like the recommendations from Spotify. Mostly, what I want out of recommendations is a list of albums I've told Spotify I want to listen to someday. So that's what I'm going to build. I have been hoarding a list of albums I want to listen to in Readwise. I'm ready to unleash that on myself as part of my daily sync. 

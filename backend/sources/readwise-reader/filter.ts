@@ -70,3 +70,28 @@ export const isValidProduct = (product: ReadwiseArticle): boolean => {
 		product.title.length > 0
 	);
 };
+
+export const isValidAlbum = (album: ReadwiseArticle): boolean => {
+	// if there are no tags this is not it
+	if (!album.tags) return false;
+
+	// if the products is not in the tags, not valid
+	let isProductTag = false;
+
+	for (const tag of Object.keys(album.tags)) {
+		if (tag === "music") {
+			isProductTag = true;
+		}
+	}
+
+	if (!isProductTag) return false;
+
+	// if there is no id or url, we are in trouble
+	return (
+		album.id !== undefined &&
+		album.id.length > 0 &&
+		album.url.length > 0 &&
+		album.title !== undefined &&
+		album.title.length > 0
+	);
+};
