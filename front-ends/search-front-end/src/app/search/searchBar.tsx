@@ -1,6 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
-import { MatterArticle, NarrowedArticle } from "./utils/types";
-import { simpleSearch } from "./utils/search";
+import { Dispatch, SetStateAction } from "react";
 
 type SearchBarParams = {
   searchTerm: string;

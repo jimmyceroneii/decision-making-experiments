@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { SearchBar } from "./searchBar";
-import { MatterArticle, NarrowedArticle } from "./utils/types";
-import { fetchLocalMatterArticles } from "./utils/sources";
 import { SearchResultContainer } from "./searchResultContainer";
 import { simpleSearch } from "./utils/search";
+import { fetchLocalMatterArticles } from "./utils/sources";
+import { MatterArticle, NarrowedArticle } from "./utils/types";
 
 export const SearchPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');

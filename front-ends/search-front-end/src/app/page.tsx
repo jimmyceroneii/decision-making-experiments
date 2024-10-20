@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { SearchPage } from "./search/searchPage";
 
 export default function Home() {
