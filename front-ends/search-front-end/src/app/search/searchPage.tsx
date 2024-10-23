@@ -4,18 +4,21 @@ import { useEffect, useState } from "react";
 import { SearchBar } from "./searchBar";
 import { SearchResultContainer } from "./searchResultContainer";
 import { simpleSearch } from "./utils/search";
-import { fetchLocalMatterArticles } from "./utils/sources";
-import { MatterArticle, NarrowedArticle } from "./utils/types";
+import { fetchLocalMatterArticles, fetchLocalReadwiseArticles } from "./utils/sources";
+import type { MatterArticle, NarrowedArticle, ReadwiseArticle } from "./utils/types";
 
 export const SearchPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [articles, setArticles] = useState<MatterArticle[]>([]);
+  const [articles, setArticles] = useState<(MatterArticle | ReadwiseArticle)[]>([]);
   const [searchResults, setSearchResults] = useState<NarrowedArticle[]>([]);
 
   useEffect(() => {
-    const data = fetchLocalMatterArticles();
+    const matterArticles = fetchLocalMatterArticles();
+    const readwiseArticles = fetchLocalReadwiseArticles();
 
-    if (!data) {
+    const data = [...matterArticles, ...readwiseArticles];
+
+    if (data.length === 0) {
       throw new Error("articles failed to load");
     }
 
